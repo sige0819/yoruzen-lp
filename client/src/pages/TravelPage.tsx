@@ -1,0 +1,515 @@
+/*
+ * /travel — 旅行者向けLP
+ * Design: 夜桜の間 — 英語メイン + 繁体中文 + 한국어 パラグラフ
+ * 訴求: 45分Quick Reset主役・迷子ゼロ道案内・言語不安解消
+ * CTA: [SQUARE_TRAVEL_URL] × 上中下3箇所
+ */
+
+import { useEffect, useRef, useState } from "react";
+import { Link } from "wouter";
+
+const SQUARE_TRAVEL_URL = "[SQUARE_TRAVEL_URL]";
+const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/hero-travel-ikS4KAjfKZKreZPJacWxYk.webp";
+const MENU_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/menu-bg-c69VwCk2UsoNzVnr7L95ma.webp";
+
+function useInView(threshold = 0.15) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setInView(true); },
+      { threshold }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return { ref, inView };
+}
+
+function AnimatedSection({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const { ref, inView } = useInView();
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "translateY(0)" : "translateY(24px)",
+        transition: `opacity 0.7s ease ${delay}ms, transform 0.7s ease ${delay}ms`,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function CTAButton({ href, children, sub }: { href: string; children: React.ReactNode; sub?: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="zen-shimmer inline-block w-full max-w-sm bg-[#D4A853] text-[#0D1220] font-bold text-center py-4 px-8 rounded-sm tracking-wide hover:bg-[#E5BC6A] transition-colors duration-300 shadow-lg shadow-[#D4A853]/20"
+      style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.05rem" }}
+    >
+      {children}
+      {sub && <span className="block text-xs font-normal mt-0.5 opacity-70">{sub}</span>}
+    </a>
+  );
+}
+
+const WHY_US = [
+  { icon: "⚡", text: "Quick reset in 45 minutes — perfect between check-out and check-in" },
+  { icon: "🚪", text: "Quiet private room (1 guest per slot)" },
+  { icon: "✋", text: "No oil / No water (your hair won't get wet)" },
+  { icon: "🗣️", text: "English support available" },
+  { icon: "🧳", text: "Luggage storage available (10:00–20:00, subject to space)" },
+];
+
+const MENUS_EN = [
+  {
+    name: "Quick Reset",
+    time: "45 min",
+    price: "¥8,000",
+    highlight: true,
+    label: "Recommended",
+  },
+  {
+    name: "Standard Recovery",
+    time: "60 min",
+    price: "¥11,000",
+    highlight: false,
+    label: "",
+  },
+  {
+    name: "Deep Sleep",
+    time: "90 min",
+    price: "¥15,000",
+    highlight: false,
+    label: "",
+  },
+];
+
+const FAQS_EN = [
+  { q: "Do you speak English?", a: "Yes, English support is available." },
+  { q: "Can you store luggage?", a: "Yes, during business hours (10:00–20:00), subject to space." },
+  { q: "What if I'm late?", a: "The session time may be shortened. Please arrive 5 minutes early." },
+  { q: "Is there oil used?", a: "No oil, no water. Dry head spa only — your hair stays dry." },
+  { q: "Do I need a reservation?", a: "Yes, reservation required. Please book via Square before visiting." },
+];
+
+const DIRECTIONS = [
+  { step: "1", title: "Exit Kagoshima-Chuo Station", desc: "Take the central exit toward the Shinkansen side." },
+  { step: "2", title: "Find Take Station Building", desc: "Walk straight ~3 minutes. Look for the building entrance." },
+  { step: "3", title: "Go up to 2F", desc: "Take the stairs or elevator to the 2nd floor." },
+  { step: "4", title: "Room 203 — yoru+禅", desc: "Turn right at the top of the stairs. Room 203 is on your left." },
+];
+
+export default function TravelPage() {
+  const [heroVisible, setHeroVisible] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  useEffect(() => {
+    const t = setTimeout(() => setHeroVisible(true), 100);
+    return () => clearTimeout(t);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-[#1A1F2E] text-[#EDE8DC]">
+      {/* Back link */}
+      <div className="absolute top-4 left-4 z-50">
+        <Link href="/go">
+          <span className="text-[#D4A853]/60 text-xs hover:text-[#D4A853] transition-colors flex items-center gap-1">
+            ← Back
+          </span>
+        </Link>
+      </div>
+
+      {/* ===== HERO ===== */}
+      <section className="relative min-h-[90vh] flex flex-col justify-end overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${HERO_BG})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1A1F2E] via-[#1A1F2E]/55 to-[#1A1F2E]/15" />
+
+        <div
+          className="relative z-10 container pb-16 pt-24"
+          style={{
+            opacity: heroVisible ? 1 : 0,
+            transform: heroVisible ? "translateX(0)" : "translateX(-24px)",
+            transition: "opacity 0.8s ease, transform 0.8s ease",
+          }}
+        >
+          {/* Brand */}
+          <div className="flex items-center gap-2 mb-4">
+            <span className="w-6 h-px bg-[#D4A853]" />
+            <span className="text-[#D4A853] text-xs tracking-[0.3em] uppercase font-light">
+              yoru+禅 / Kagoshima
+            </span>
+          </div>
+
+          {/* Badges */}
+          <div className="flex flex-wrap gap-2 mb-5">
+            {[
+              "3 min from Kagoshima-Chuo",
+              "Private Room",
+              "English OK",
+              "Luggage Storage",
+            ].map((b) => (
+              <span key={b} className="text-xs text-[#D4A853] border border-[#D4A853]/40 px-3 py-1 rounded-full bg-[#D4A853]/10">
+                {b}
+              </span>
+            ))}
+          </div>
+
+          {/* Headline */}
+          <h1
+            className="text-3xl md:text-5xl font-bold text-[#EDE8DC] leading-snug mb-3 max-w-lg"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
+            Private Dry Head Spa<br />
+            <span className="text-[#D4A853]">near Kagoshima-Chuo</span>
+          </h1>
+
+          {/* Sub */}
+          <p className="text-[#EDE8DC]/75 text-base md:text-lg leading-relaxed max-w-md mb-2">
+            No oil, no water. One guest per slot. English available.
+          </p>
+          <p className="text-[#EDE8DC]/55 text-sm mb-8">
+            Luggage storage during business hours (10:00–20:00).
+          </p>
+
+          {/* CTA — Top */}
+          <CTAButton href={SQUARE_TRAVEL_URL} sub="45 min Quick Reset — ¥8,000">
+            Book Now
+          </CTAButton>
+        </div>
+      </section>
+
+      {/* ===== WHY US ===== */}
+      <section
+        className="relative bg-[#242320] py-16"
+        style={{
+          clipPath: "polygon(0 5%, 100% 0, 100% 100%, 0 100%)",
+          marginTop: "-3rem",
+          paddingTop: "5rem",
+        }}
+      >
+        <div className="container">
+          <AnimatedSection>
+            <div className="flex items-center gap-3 mb-8">
+              <span className="w-8 h-px bg-[#D4A853]" />
+              <h2
+                className="text-xl font-medium text-[#EDE8DC]"
+                style={{ fontFamily: "'Playfair Display', serif" }}
+              >
+                Why yoru+禅?
+              </h2>
+            </div>
+          </AnimatedSection>
+          <div className="grid gap-4">
+            {WHY_US.map((w, i) => (
+              <AnimatedSection key={i} delay={i * 100}>
+                <div className="flex items-start gap-4 p-4 border border-[#D4A853]/20 rounded-sm bg-[#1A1F2E]/50">
+                  <span className="text-2xl mt-0.5">{w.icon}</span>
+                  <p className="text-[#EDE8DC]/85 text-base leading-relaxed">{w.text}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== MENU ===== */}
+      <section
+        className="relative py-16"
+        style={{
+          backgroundImage: `url(${MENU_BG})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="absolute inset-0 bg-[#1A1F2E]/85" />
+        <div className="relative z-10 container">
+          <AnimatedSection>
+            <div className="flex items-center gap-3 mb-8">
+              <span className="w-8 h-px bg-[#D4A853]" />
+              <h2
+                className="text-xl font-medium text-[#EDE8DC]"
+                style={{ fontFamily: "'Playfair Display', serif" }}
+              >
+                Menu
+              </h2>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid gap-4 mb-8">
+            {MENUS_EN.map((m, i) => (
+              <AnimatedSection key={i} delay={i * 100}>
+                <div
+                  className={`relative p-5 rounded-sm border transition-all ${
+                    m.highlight
+                      ? "border-[#D4A853] bg-[#D4A853]/10"
+                      : "border-[#EDE8DC]/15 bg-[#EDE8DC]/5"
+                  }`}
+                >
+                  {m.highlight && (
+                    <span className="absolute -top-3 left-4 bg-[#D4A853] text-[#0D1220] text-xs font-bold px-3 py-0.5 rounded-full">
+                      ★ Recommended
+                    </span>
+                  )}
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <div
+                        className="text-[#EDE8DC] text-base font-medium mb-0.5"
+                        style={{ fontFamily: "'Playfair Display', serif" }}
+                      >
+                        {m.name}
+                      </div>
+                      <div className="text-[#EDE8DC]/50 text-sm">{m.time}</div>
+                    </div>
+                    <span className="text-[#D4A853] text-xl font-bold">{m.price}</span>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          {/* CTA — Middle */}
+          <AnimatedSection>
+            <div className="flex justify-center">
+              <CTAButton href={SQUARE_TRAVEL_URL} sub="45 min — ¥8,000">
+                Book Quick Reset
+              </CTAButton>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ===== HOW TO GET HERE ===== */}
+      <section
+        className="relative bg-[#242320] py-16"
+        style={{
+          clipPath: "polygon(0 5%, 100% 0, 100% 100%, 0 100%)",
+          marginTop: "-3rem",
+          paddingTop: "5rem",
+        }}
+      >
+        <div className="container">
+          <AnimatedSection>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="w-8 h-px bg-[#D4A853]" />
+              <h2
+                className="text-xl font-medium text-[#EDE8DC]"
+                style={{ fontFamily: "'Playfair Display', serif" }}
+              >
+                How to Get Here
+              </h2>
+            </div>
+            <p className="text-[#EDE8DC]/50 text-sm mb-8">
+              Please arrive 5 minutes early. Late arrival may shorten the session.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid gap-4">
+            {DIRECTIONS.map((d, i) => (
+              <AnimatedSection key={i} delay={i * 100}>
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full border border-[#D4A853] flex items-center justify-center text-[#D4A853] text-sm font-bold">
+                    {d.step}
+                  </div>
+                  <div className="pt-0.5">
+                    <p className="text-[#EDE8DC] font-medium text-sm mb-0.5">{d.title}</p>
+                    <p className="text-[#EDE8DC]/55 text-sm leading-relaxed">{d.desc}</p>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          {/* Photo placeholder */}
+          <AnimatedSection delay={400}>
+            <div className="mt-8 p-5 border border-dashed border-[#D4A853]/30 rounded-sm bg-[#1A1F2E]/30 text-center">
+              <p className="text-[#D4A853]/60 text-sm">
+                📸 Direction photos (station → entrance → 2F → Room 203) will be added here.
+              </p>
+              <p className="text-[#EDE8DC]/30 text-xs mt-1">
+                Please provide photos to complete this section.
+              </p>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ===== FAQ ===== */}
+      <section className="bg-[#1A1F2E] py-16">
+        <div className="container">
+          <AnimatedSection>
+            <div className="flex items-center gap-3 mb-8">
+              <span className="w-8 h-px bg-[#D4A853]" />
+              <h2
+                className="text-xl font-medium text-[#EDE8DC]"
+                style={{ fontFamily: "'Playfair Display', serif" }}
+              >
+                FAQ
+              </h2>
+            </div>
+          </AnimatedSection>
+          <div className="grid gap-3">
+            {FAQS_EN.map((faq, i) => (
+              <AnimatedSection key={i} delay={i * 80}>
+                <div className="border border-[#EDE8DC]/10 rounded-sm overflow-hidden">
+                  <button
+                    className="w-full text-left p-4 flex items-center justify-between gap-3 hover:bg-[#EDE8DC]/5 transition-colors"
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  >
+                    <span className="text-[#EDE8DC]/90 text-sm font-medium">
+                      Q: {faq.q}
+                    </span>
+                    <span className="text-[#D4A853] text-lg flex-shrink-0">
+                      {openFaq === i ? "−" : "+"}
+                    </span>
+                  </button>
+                  {openFaq === i && (
+                    <div className="px-4 pb-4 text-[#EDE8DC]/65 text-sm leading-relaxed border-t border-[#EDE8DC]/10 pt-3">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 繁體中文 ===== */}
+      <section
+        className="relative bg-[#242320] py-14"
+        style={{
+          clipPath: "polygon(0 4%, 100% 0, 100% 100%, 0 100%)",
+          marginTop: "-2rem",
+          paddingTop: "4rem",
+        }}
+      >
+        <div className="container">
+          <AnimatedSection>
+            <div className="flex items-center gap-3 mb-5">
+              <span className="w-8 h-px bg-[#D4A853]" />
+              <span className="text-[#D4A853] text-xs tracking-widest">繁體中文</span>
+            </div>
+            <div className="p-5 border border-[#D4A853]/20 rounded-sm bg-[#1A1F2E]/50">
+              <p
+                className="text-[#EDE8DC]/85 leading-loose text-sm"
+                style={{ fontFamily: "'Noto Serif TC', serif" }}
+              >
+                <span className="text-[#D4A853] font-medium">鹿兒島中央站步行約3分鐘。</span>
+                不使用精油、不弄濕頭髮的乾式頭療（Dry Head Spa）。一個時段只接待一位客人，安靜私密。可英文溝通。營業時間內可寄放行李（10:00–20:00，視空間而定）。推薦 <span className="text-[#D4A853] font-medium">45分鐘快速恢復旅途疲勞</span>。
+              </p>
+              <div className="mt-4">
+                <a
+                  href={SQUARE_TRAVEL_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="zen-shimmer inline-block bg-[#D4A853] text-[#0D1220] font-bold py-3 px-6 rounded-sm text-sm hover:bg-[#E5BC6A] transition-colors"
+                  style={{ fontFamily: "'Noto Serif TC', serif" }}
+                >
+                  立即預約
+                </a>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ===== 한국어 ===== */}
+      <section className="bg-[#1A1F2E] py-14">
+        <div className="container">
+          <AnimatedSection>
+            <div className="flex items-center gap-3 mb-5">
+              <span className="w-8 h-px bg-[#D4A853]" />
+              <span className="text-[#D4A853] text-xs tracking-widest">한국어</span>
+            </div>
+            <div className="p-5 border border-[#D4A853]/20 rounded-sm bg-[#242320]/50">
+              <p
+                className="text-[#EDE8DC]/85 leading-loose text-sm"
+                style={{ fontFamily: "'Noto Sans KR', sans-serif" }}
+              >
+                <span className="text-[#D4A853] font-medium">가고시마추오역에서 도보 약 3분.</span>{" "}
+                오일/물 없이 받는 드라이 헤드 스파로 머리카락이 젖지 않습니다. 1타임 1명 프라이빗 룸. 영어 가능. 영업시간 내 짐 보관 가능(10:00–20:00, 공간 제한).{" "}
+                <span className="text-[#D4A853] font-medium">45분 퀵 리셋 추천.</span>
+              </p>
+              <div className="mt-4">
+                <a
+                  href={SQUARE_TRAVEL_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="zen-shimmer inline-block bg-[#D4A853] text-[#0D1220] font-bold py-3 px-6 rounded-sm text-sm hover:bg-[#E5BC6A] transition-colors"
+                  style={{ fontFamily: "'Noto Sans KR', sans-serif" }}
+                >
+                  지금 예약
+                </a>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ===== FINAL CTA ===== */}
+      <section
+        className="relative py-20 text-center"
+        style={{
+          backgroundImage: `url(${HERO_BG})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+        }}
+      >
+        <div className="absolute inset-0 bg-[#1A1F2E]/90" />
+        <div className="relative z-10 container">
+          <AnimatedSection>
+            <h2
+              className="text-2xl md:text-3xl font-bold text-[#EDE8DC] mb-3"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              Reset your body.<br />
+              <span className="text-[#D4A853]">In 45 minutes.</span>
+            </h2>
+            <p className="text-[#EDE8DC]/55 text-sm mb-8">
+              Private room · No oil · English OK · Near Kagoshima-Chuo Station
+            </p>
+            <div className="flex justify-center">
+              <CTAButton href={SQUARE_TRAVEL_URL} sub="45 min Quick Reset — ¥8,000">
+                Book Now
+              </CTAButton>
+            </div>
+            <p className="mt-4 text-[#EDE8DC]/30 text-xs">
+              Reservation confirmed via Square.
+            </p>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#0D1220] py-8 text-center">
+        <p
+          className="text-[#D4A853] text-lg font-bold mb-1"
+          style={{ fontFamily: "'Playfair Display', serif" }}
+        >
+          yoru+禅
+        </p>
+        <p className="text-[#EDE8DC]/40 text-xs">
+          Take Station Building 2F-203 | 10:00–20:00
+        </p>
+        <div className="mt-4">
+          <Link href="/go">
+            <span className="text-[#EDE8DC]/30 text-xs hover:text-[#D4A853] transition-colors">
+              ← Language selection
+            </span>
+          </Link>
+        </div>
+      </footer>
+    </div>
+  );
+}

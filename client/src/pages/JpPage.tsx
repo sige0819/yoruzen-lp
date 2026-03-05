@@ -1,0 +1,422 @@
+/*
+ * /jp — 日本人向けLP
+ * Design: 夜桜の間 — 深藍背景、桜金アクセント、斜めセクション分割
+ * 訴求: 静寂・完全個室・1枠1名 → 別カテゴリ化
+ * CTA: [SQUARE_DOMESTIC_URL] × 上中下3箇所
+ */
+
+import { useEffect, useRef, useState } from "react";
+import { Link } from "wouter";
+
+const SQUARE_DOMESTIC_URL = "[SQUARE_DOMESTIC_URL]";
+const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/hero-jp-bynSTbojrzBKK6QbqjbEYZ.webp";
+const MENU_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/menu-bg-c69VwCk2UsoNzVnr7L95ma.webp";
+
+function useInView(threshold = 0.15) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setInView(true); },
+      { threshold }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return { ref, inView };
+}
+
+function AnimatedSection({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const { ref, inView } = useInView();
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "translateY(0)" : "translateY(24px)",
+        transition: `opacity 0.7s ease ${delay}ms, transform 0.7s ease ${delay}ms`,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function CTAButton({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="zen-shimmer inline-block w-full max-w-sm bg-[#D4A853] text-[#0D1220] font-bold text-center py-4 px-8 rounded-sm tracking-widest hover:bg-[#E5BC6A] transition-colors duration-300 shadow-lg shadow-[#D4A853]/20"
+      style={{ fontFamily: "'Noto Serif JP', serif", fontSize: "1.05rem" }}
+    >
+      {children}
+    </a>
+  );
+}
+
+const PAINS = [
+  { icon: "🌙", text: "寝つきが悪い／眠りが浅い気がする" },
+  { icon: "👁️", text: "目の疲れ・頭が重い感じが続く" },
+  { icon: "💆", text: "首肩がこわばってリラックスしづらい" },
+];
+
+const FEATURES = [
+  { icon: "🚪", title: "完全個室・1枠1名", desc: "周りを気にせず、ただ自分のための時間。" },
+  { icon: "✋", title: "オイル不使用のドライ施術", desc: "髪が濡れません。施術後すぐ外出できます。" },
+  { icon: "🏮", title: "和モダンの静かな空間", desc: "\"静けさ\"を大切にした、落ち着いた雰囲気。" },
+];
+
+const MENUS = [
+  { time: "45分", price: "¥4,980", label: "" },
+  { time: "60分", price: "¥6,980", label: "おすすめ", highlight: true },
+  { time: "90分", price: "¥9,980", label: "じっくり" },
+];
+
+const FAQS = [
+  { q: "遅刻した場合は？", a: "遅刻分は施術時間が短くなる場合があります。余裕をもってお越しください。" },
+  { q: "支払い方法は？", a: "予約画面（Square）にてご確認ください。" },
+  { q: "荷物預かりはできますか？", a: "営業時間内（10:00–20:00）で可能です（スペースに限りあり）。" },
+  { q: "オイルは使いますか？", a: "使用しません。ドライ施術のため、髪や服が汚れません。" },
+  { q: "予約なしで行けますか？", a: "完全予約制となっております。事前のご予約をお願いします。" },
+];
+
+export default function JpPage() {
+  const [heroVisible, setHeroVisible] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  useEffect(() => {
+    const t = setTimeout(() => setHeroVisible(true), 100);
+    return () => clearTimeout(t);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-[#1A1F2E] text-[#EDE8DC]">
+      {/* Back link */}
+      <div className="absolute top-4 left-4 z-50">
+        <Link href="/go">
+          <span className="text-[#D4A853]/60 text-xs hover:text-[#D4A853] transition-colors flex items-center gap-1">
+            ← 戻る
+          </span>
+        </Link>
+      </div>
+
+      {/* ===== HERO ===== */}
+      <section className="relative min-h-[90vh] flex flex-col justify-end overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${HERO_BG})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1A1F2E] via-[#1A1F2E]/60 to-[#1A1F2E]/20" />
+
+        <div
+          className="relative z-10 container pb-16 pt-24"
+          style={{
+            opacity: heroVisible ? 1 : 0,
+            transform: heroVisible ? "translateX(0)" : "translateX(-24px)",
+            transition: "opacity 0.8s ease, transform 0.8s ease",
+          }}
+        >
+          {/* Brand */}
+          <div className="flex items-center gap-2 mb-4">
+            <span className="w-6 h-px bg-[#D4A853]" />
+            <span className="text-[#D4A853] text-xs tracking-[0.3em] uppercase font-light">
+              Dry Head Spa / 鹿児島中央
+            </span>
+          </div>
+
+          {/* Badges */}
+          <div className="flex flex-wrap gap-2 mb-5">
+            {["鹿児島中央駅徒歩約3分", "完全予約制", "1枠1名"].map((b) => (
+              <span key={b} className="text-xs text-[#D4A853] border border-[#D4A853]/40 px-3 py-1 rounded-full bg-[#D4A853]/10">
+                {b}
+              </span>
+            ))}
+          </div>
+
+          {/* Headline */}
+          <h1
+            className="text-3xl md:text-5xl font-bold text-[#EDE8DC] leading-snug mb-4 max-w-lg"
+            style={{ fontFamily: "'Noto Serif JP', serif" }}
+          >
+            静かな完全個室で、<br />眠りに入る準備。
+          </h1>
+
+          {/* Sub */}
+          <p className="text-[#EDE8DC]/75 text-base md:text-lg leading-relaxed max-w-md mb-8">
+            ドライヘッドスパで、がんばった頭と心をゆるめる時間。<br />
+            1枠1名のプライベート空間。
+          </p>
+
+          {/* CTA — Top */}
+          <CTAButton href={SQUARE_DOMESTIC_URL}>予約する</CTAButton>
+        </div>
+      </section>
+
+      {/* ===== PAIN SECTION ===== */}
+      <section
+        className="relative bg-[#242320] py-16"
+        style={{
+          clipPath: "polygon(0 5%, 100% 0, 100% 100%, 0 100%)",
+          marginTop: "-3rem",
+          paddingTop: "5rem",
+        }}
+      >
+        <div className="container">
+          <AnimatedSection>
+            <div className="flex items-center gap-3 mb-8">
+              <span className="w-8 h-px bg-[#D4A853]" />
+              <h2
+                className="text-xl font-medium text-[#EDE8DC]"
+                style={{ fontFamily: "'Noto Serif JP', serif" }}
+              >
+                こんなお悩みはありませんか？
+              </h2>
+            </div>
+            <div className="grid gap-4">
+              {PAINS.map((p, i) => (
+                <AnimatedSection key={i} delay={i * 100}>
+                  <div className="flex items-start gap-4 p-4 border border-[#D4A853]/20 rounded-sm bg-[#1A1F2E]/50">
+                    <span className="text-2xl mt-0.5">{p.icon}</span>
+                    <p className="text-[#EDE8DC]/85 text-base leading-relaxed">{p.text}</p>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
+            <p className="mt-4 text-[#EDE8DC]/40 text-xs pl-1">
+              ※施術は医療行為ではありません。
+            </p>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ===== FEATURES ===== */}
+      <section className="bg-[#1A1F2E] py-16">
+        <div className="container">
+          <AnimatedSection>
+            <div className="flex items-center gap-3 mb-8">
+              <span className="w-8 h-px bg-[#D4A853]" />
+              <h2
+                className="text-xl font-medium text-[#EDE8DC]"
+                style={{ fontFamily: "'Noto Serif JP', serif" }}
+              >
+                yoru+禅の3つの特徴
+              </h2>
+            </div>
+          </AnimatedSection>
+          <div className="grid gap-5">
+            {FEATURES.map((f, i) => (
+              <AnimatedSection key={i} delay={i * 120}>
+                <div className="relative pl-6 zen-gold-line py-2">
+                  <div className="text-2xl mb-2">{f.icon}</div>
+                  <h3
+                    className="text-[#D4A853] font-medium text-base mb-1"
+                    style={{ fontFamily: "'Noto Serif JP', serif" }}
+                  >
+                    {f.title}
+                  </h3>
+                  <p className="text-[#EDE8DC]/70 text-sm leading-relaxed">{f.desc}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== MENU ===== */}
+      <section
+        className="relative py-16"
+        style={{
+          backgroundImage: `url(${MENU_BG})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="absolute inset-0 bg-[#1A1F2E]/85" />
+        <div className="relative z-10 container">
+          <AnimatedSection>
+            <div className="flex items-center gap-3 mb-8">
+              <span className="w-8 h-px bg-[#D4A853]" />
+              <h2
+                className="text-xl font-medium text-[#EDE8DC]"
+                style={{ fontFamily: "'Noto Serif JP', serif" }}
+              >
+                メニュー
+              </h2>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid gap-4 mb-8">
+            {MENUS.map((m, i) => (
+              <AnimatedSection key={i} delay={i * 100}>
+                <div
+                  className={`relative p-5 rounded-sm border transition-all ${
+                    m.highlight
+                      ? "border-[#D4A853] bg-[#D4A853]/10"
+                      : "border-[#EDE8DC]/15 bg-[#EDE8DC]/5"
+                  }`}
+                >
+                  {m.highlight && (
+                    <span className="absolute -top-3 left-4 bg-[#D4A853] text-[#0D1220] text-xs font-bold px-3 py-0.5 rounded-full">
+                      おすすめ
+                    </span>
+                  )}
+                  {m.label && !m.highlight && (
+                    <span className="absolute -top-3 left-4 bg-[#EDE8DC]/20 text-[#EDE8DC] text-xs px-3 py-0.5 rounded-full">
+                      {m.label}
+                    </span>
+                  )}
+                  <div className="flex items-center justify-between">
+                    <span
+                      className="text-[#EDE8DC] text-lg font-medium"
+                      style={{ fontFamily: "'Noto Serif JP', serif" }}
+                    >
+                      {m.time}
+                    </span>
+                    <span className="text-[#D4A853] text-xl font-bold">
+                      {m.price}
+                    </span>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          {/* CTA — Middle */}
+          <AnimatedSection>
+            <div className="flex justify-center">
+              <CTAButton href={SQUARE_DOMESTIC_URL}>予約する</CTAButton>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ===== ACCESS ===== */}
+      <section
+        className="relative bg-[#242320] py-16"
+        style={{
+          clipPath: "polygon(0 5%, 100% 0, 100% 100%, 0 100%)",
+          marginTop: "-3rem",
+          paddingTop: "5rem",
+        }}
+      >
+        <div className="container">
+          <AnimatedSection>
+            <div className="flex items-center gap-3 mb-6">
+              <span className="w-8 h-px bg-[#D4A853]" />
+              <h2
+                className="text-xl font-medium text-[#EDE8DC]"
+                style={{ fontFamily: "'Noto Serif JP', serif" }}
+              >
+                アクセス
+              </h2>
+            </div>
+            <div className="p-5 border border-[#D4A853]/20 rounded-sm bg-[#1A1F2E]/50">
+              <p className="text-[#EDE8DC]/85 leading-relaxed">
+                <span className="text-[#D4A853] font-medium">鹿児島中央駅から徒歩約3分。</span><br />
+                武ステーションビル 2F 203（yoru+禅）<br />
+                <span className="text-[#EDE8DC]/50 text-sm">営業時間：10:00–20:00</span>
+              </p>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ===== FAQ ===== */}
+      <section className="bg-[#1A1F2E] py-16">
+        <div className="container">
+          <AnimatedSection>
+            <div className="flex items-center gap-3 mb-8">
+              <span className="w-8 h-px bg-[#D4A853]" />
+              <h2
+                className="text-xl font-medium text-[#EDE8DC]"
+                style={{ fontFamily: "'Noto Serif JP', serif" }}
+              >
+                よくある質問
+              </h2>
+            </div>
+          </AnimatedSection>
+          <div className="grid gap-3">
+            {FAQS.map((faq, i) => (
+              <AnimatedSection key={i} delay={i * 80}>
+                <div className="border border-[#EDE8DC]/10 rounded-sm overflow-hidden">
+                  <button
+                    className="w-full text-left p-4 flex items-center justify-between gap-3 hover:bg-[#EDE8DC]/5 transition-colors"
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  >
+                    <span className="text-[#EDE8DC]/90 text-sm font-medium">
+                      Q. {faq.q}
+                    </span>
+                    <span className="text-[#D4A853] text-lg flex-shrink-0">
+                      {openFaq === i ? "−" : "+"}
+                    </span>
+                  </button>
+                  {openFaq === i && (
+                    <div className="px-4 pb-4 text-[#EDE8DC]/65 text-sm leading-relaxed border-t border-[#EDE8DC]/10 pt-3">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== FINAL CTA ===== */}
+      <section
+        className="relative py-20 text-center"
+        style={{
+          backgroundImage: `url(${MENU_BG})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="absolute inset-0 bg-[#1A1F2E]/90" />
+        <div className="relative z-10 container">
+          <AnimatedSection>
+            <h2
+              className="text-2xl md:text-3xl font-bold text-[#EDE8DC] mb-3"
+              style={{ fontFamily: "'Noto Serif JP', serif" }}
+            >
+              今日の疲れを、今日ゆるめる。
+            </h2>
+            <p className="text-[#EDE8DC]/60 text-sm mb-8">
+              完全個室・1枠1名のプライベート空間でお待ちしています。
+            </p>
+            <div className="flex justify-center">
+              <CTAButton href={SQUARE_DOMESTIC_URL}>予約する</CTAButton>
+            </div>
+            <p className="mt-4 text-[#EDE8DC]/30 text-xs">
+              予約はSquareで確定します。
+            </p>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#0D1220] py-8 text-center">
+        <p
+          className="text-[#D4A853] text-lg font-bold mb-1"
+          style={{ fontFamily: "'Noto Serif JP', serif" }}
+        >
+          yoru+禅
+        </p>
+        <p className="text-[#EDE8DC]/40 text-xs">
+          武ステーションビル 2F 203 | 10:00–20:00
+        </p>
+        <div className="mt-4">
+          <Link href="/go">
+            <span className="text-[#EDE8DC]/30 text-xs hover:text-[#D4A853] transition-colors">
+              ← 言語選択に戻る
+            </span>
+          </Link>
+        </div>
+      </footer>
+    </div>
+  );
+}
