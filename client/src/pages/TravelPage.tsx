@@ -1,8 +1,8 @@
 /*
  * /travel — 旅行者向けLP
  * Design: 夜桜の間 — 英語メイン + 繁体中文 + 한국어 パラグラフ
- * 訴求: 45分Quick Reset主役・迷子ゼロ道案内・言語不安解消
- * CTA: [SQUARE_TRAVEL_URL] × 上中下3箇所
+ * 訴求: 45min Traveler Recovery主役・迷子ゼロ道案内・言語不安解消
+ * CTA: SQUARE_TRAVEL_URL × 上中下3箇所
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -59,43 +59,47 @@ function CTAButton({ href, children, sub }: { href: string; children: React.Reac
 }
 
 const WHY_US = [
-  { icon: "⚡", text: "Quick reset in 45 minutes — perfect between check-out and check-in" },
-  { icon: "🚪", text: "Quiet private room (1 guest per slot)" },
-  { icon: "✋", text: "No oil / No water (your hair won't get wet)" },
+  { icon: "🚶", text: "3 min from Kagoshima-Chuo Station" },
+  { icon: "🚪", text: "Private room (1 guest per slot)" },
   { icon: "🗣️", text: "English support available" },
-  { icon: "🧳", text: "Luggage storage available (10:00–20:00, subject to space)" },
+  { icon: "🧳", text: "Luggage storage during business hours (10:00–20:00)" },
+  { icon: "✨", text: "Carbonated scalp spray included" },
+  { icon: "🥥", text: "Coconut-oil foot care available" },
 ];
 
 const MENUS_EN = [
   {
     name: "Quick Reset",
+    time: "30 min",
+    price: "¥6,000",
+    highlight: false,
+    label: "",
+    desc: "Short dry head spa for travelers. Recommended for jet lag, head heaviness, and walking fatigue.",
+  },
+  {
+    name: "Traveler Recovery",
     time: "45 min",
     price: "¥8,000",
     highlight: true,
-    label: "Recommended",
+    label: "★ Recommended",
+    desc: "Private dry head spa with carbonated scalp spray. Recommended for jet lag, neck and shoulder fatigue, and travel recovery.",
   },
   {
-    name: "Standard Recovery",
+    name: "Japanese Rest Experience",
     time: "60 min",
     price: "¥11,000",
     highlight: false,
     label: "",
-  },
-  {
-    name: "Deep Sleep",
-    time: "90 min",
-    price: "¥15,000",
-    highlight: false,
-    label: "",
+    desc: "Dry head spa with coconut-oil foot care in a private room. Includes English support and a small Japanese hospitality touch.",
   },
 ];
 
 const FAQS_EN = [
+  { q: "Can I bring luggage?", a: "Yes, luggage storage is available during business hours (10:00–20:00)." },
   { q: "Do you speak English?", a: "Yes, English support is available." },
-  { q: "Can you store luggage?", a: "Yes, during business hours (10:00–20:00), subject to space." },
+  { q: "Do I need a reservation?", a: "Reservation is recommended. Walk-ins may not be available." },
+  { q: "What payment methods are available?", a: "Cash, credit card, and Square QR payment are accepted. Some mobile payments and transportation IC cards are not available." },
   { q: "What if I'm late?", a: "The session time may be shortened. Please arrive 5 minutes early." },
-  { q: "Is there oil used?", a: "No oil, no water. Dry head spa only — your hair stays dry." },
-  { q: "Do I need a reservation?", a: "Yes, reservation required. Please book via Square before visiting." },
 ];
 
 const DIRECTIONS = [
@@ -154,8 +158,8 @@ export default function TravelPage() {
             {[
               "3 min from Kagoshima-Chuo",
               "Private Room",
-              "English OK",
-              "Luggage Storage",
+              "English support",
+              "Luggage storage",
             ].map((b) => (
               <span key={b} className="text-xs text-[#D4A853] border border-[#D4A853]/40 px-3 py-1 rounded-full bg-[#D4A853]/10">
                 {b}
@@ -174,14 +178,14 @@ export default function TravelPage() {
 
           {/* Sub */}
           <p className="text-[#EDE8DC]/75 text-base md:text-lg leading-relaxed max-w-md mb-2">
-            No oil, no water. One guest per slot. English available.
+            No oil on head · No water · One guest per slot · English available.
           </p>
           <p className="text-[#EDE8DC]/55 text-sm mb-8">
             Luggage storage during business hours (10:00–20:00).
           </p>
 
           {/* CTA — Top */}
-          <CTAButton href={SQUARE_TRAVEL_URL} sub="45 min Quick Reset — ¥8,000">
+          <CTAButton href={SQUARE_TRAVEL_URL} sub="45 min Traveler Recovery — ¥8,000">
             Book Now
           </CTAButton>
         </div>
@@ -210,7 +214,7 @@ export default function TravelPage() {
           </AnimatedSection>
           <div className="grid gap-4">
             {WHY_US.map((w, i) => (
-              <AnimatedSection key={i} delay={i * 100}>
+              <AnimatedSection key={i} delay={i * 90}>
                 <div className="flex items-start gap-4 p-4 border border-[#D4A853]/20 rounded-sm bg-[#1A1F2E]/50">
                   <span className="text-2xl mt-0.5">{w.icon}</span>
                   <p className="text-[#EDE8DC]/85 text-base leading-relaxed">{w.text}</p>
@@ -244,7 +248,7 @@ export default function TravelPage() {
             </div>
           </AnimatedSection>
 
-          <div className="grid gap-4 mb-8">
+          <div className="grid gap-5 mb-8">
             {MENUS_EN.map((m, i) => (
               <AnimatedSection key={i} delay={i * 100}>
                 <div
@@ -256,10 +260,10 @@ export default function TravelPage() {
                 >
                   {m.highlight && (
                     <span className="absolute -top-3 left-4 bg-[#D4A853] text-[#0D1220] text-xs font-bold px-3 py-0.5 rounded-full">
-                      ★ Recommended
+                      {m.label}
                     </span>
                   )}
-                  <div className="flex items-start justify-between gap-2">
+                  <div className="flex items-start justify-between gap-2 mb-3">
                     <div>
                       <div
                         className="text-[#EDE8DC] text-base font-medium mb-0.5"
@@ -269,8 +273,11 @@ export default function TravelPage() {
                       </div>
                       <div className="text-[#EDE8DC]/50 text-sm">{m.time}</div>
                     </div>
-                    <span className="text-[#D4A853] text-xl font-bold">{m.price}</span>
+                    <span className="text-[#D4A853] text-xl font-bold flex-shrink-0">{m.price}</span>
                   </div>
+                  <p className="text-[#EDE8DC]/60 text-sm leading-relaxed border-t border-[#EDE8DC]/10 pt-3">
+                    {m.desc}
+                  </p>
                 </div>
               </AnimatedSection>
             ))}
@@ -280,7 +287,7 @@ export default function TravelPage() {
           <AnimatedSection>
             <div className="flex justify-center">
               <CTAButton href={SQUARE_TRAVEL_URL} sub="45 min — ¥8,000">
-                Book Quick Reset
+                Book Now
               </CTAButton>
             </div>
           </AnimatedSection>
@@ -404,7 +411,7 @@ export default function TravelPage() {
                 style={{ fontFamily: "'Noto Serif TC', serif" }}
               >
                 <span className="text-[#D4A853] font-medium">鹿兒島中央站步行約3分鐘。</span>
-                不使用精油、不弄濕頭髮的乾式頭療（Dry Head Spa）。一個時段只接待一位客人，安靜私密。可英文溝通。營業時間內可寄放行李（10:00–20:00，視空間而定）。推薦 <span className="text-[#D4A853] font-medium">45分鐘快速恢復旅途疲勞</span>。
+                不使用精油、不弄濕頭髮的乾式頭療（Dry Head Spa）。一個時段只接待一位客人，安靜私密。可英文溝通。營業時間內可寄放行李（10:00–20:00）。含碳酸頭皮護理噴霧，另有椰子油足部護理選項。推薦 <span className="text-[#D4A853] font-medium">45分鐘旅行恢復療程</span>。
               </p>
               <div className="mt-4">
                 <a
@@ -434,8 +441,8 @@ export default function TravelPage() {
                 style={{ fontFamily: "'Noto Sans KR', sans-serif" }}
               >
                 <span className="text-[#D4A853] font-medium">가고시마추오역에서 도보 약 3분.</span>{" "}
-                오일/물 없이 받는 드라이 헤드 스파로 머리카락이 젖지 않습니다. 1타임 1명 프라이빗 룸. 영어 가능. 영업시간 내 짐 보관 가능(10:00–20:00, 공간 제한).{" "}
-                <span className="text-[#D4A853] font-medium">45분 퀵 리셋 추천.</span>
+                오일/물 없이 받는 드라이 헤드 스파로 머리카락이 젖지 않습니다. 1타임 1명 프라이빗 룸. 영어 가능. 영업시간 내 짐 보관 가능(10:00–20:00). 탄산 두피 스프레이 포함, 코코넛 오일 발 케어 옵션도 있습니다.{" "}
+                <span className="text-[#D4A853] font-medium">45분 여행 회복 코스 추천.</span>
               </p>
               <div className="mt-4">
                 <a
@@ -471,16 +478,13 @@ export default function TravelPage() {
               <span className="text-[#D4A853]">In 45 minutes.</span>
             </h2>
             <p className="text-[#EDE8DC]/55 text-sm mb-8">
-              Private room · No oil · English OK · Near Kagoshima-Chuo Station
+              Private room · English OK · Near Kagoshima-Chuo Station
             </p>
             <div className="flex justify-center">
-              <CTAButton href={SQUARE_TRAVEL_URL} sub="45 min Quick Reset — ¥8,000">
+              <CTAButton href={SQUARE_TRAVEL_URL} sub="45 min Traveler Recovery — ¥8,000">
                 Book Now
               </CTAButton>
             </div>
-            <p className="mt-4 text-[#EDE8DC]/30 text-xs">
-              Reservation confirmed via Square.
-            </p>
           </AnimatedSection>
         </div>
       </section>
@@ -494,7 +498,7 @@ export default function TravelPage() {
           yoru+禅
         </p>
         <p className="text-[#EDE8DC]/40 text-xs">
-          Take Station Building 2F-203 | 10:00–20:00
+          Take Station Building 2F 203 / 10:00–20:00
         </p>
         <div className="mt-4">
           <Link href="/go">

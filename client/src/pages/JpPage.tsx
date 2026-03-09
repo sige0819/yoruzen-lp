@@ -2,7 +2,7 @@
  * /jp — 日本人向けLP
  * Design: 夜桜の間 — 深藍背景、桜金アクセント、斜めセクション分割
  * 訴求: 静寂・完全個室・1枠1名 → 別カテゴリ化
- * CTA: [SQUARE_DOMESTIC_URL] × 上中下3箇所
+ * CTA: SQUARE_DOMESTIC_URL × 上中下3箇所
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -58,29 +58,29 @@ function CTAButton({ href, children }: { href: string; children: React.ReactNode
 }
 
 const PAINS = [
-  { icon: "🌙", text: "寝つきが悪い／眠りが浅い気がする" },
-  { icon: "👁️", text: "目の疲れ・頭が重い感じが続く" },
+  { icon: "🌙", text: "眠りが浅い・寝つきが悪い気がする" },
+  { icon: "👁️", text: "眼精疲労・頭が重い感じが続く" },
   { icon: "💆", text: "首肩がこわばってリラックスしづらい" },
 ];
 
 const FEATURES = [
   { icon: "🚪", title: "完全個室・1枠1名", desc: "周りを気にせず、ただ自分のための時間。" },
-  { icon: "✋", title: "オイル不使用のドライ施術", desc: "髪が濡れません。施術後すぐ外出できます。" },
+  { icon: "💧", title: "頭は水・オイルを使わないドライヘッドスパ", desc: "頭皮・髪が濡れません。施術後すぐ外出できます。" },
   { icon: "🏮", title: "和モダンの静かな空間", desc: "\"静けさ\"を大切にした、落ち着いた雰囲気。" },
 ];
 
 const MENUS = [
-  { time: "45分", price: "¥4,980", label: "" },
-  { time: "60分", price: "¥6,980", label: "おすすめ", highlight: true },
-  { time: "90分", price: "¥9,980", label: "じっくり" },
+  { time: "30分", name: "クイックリセット", price: "¥3,980", label: "" },
+  { time: "45分", name: "禅睡", price: "¥4,980", label: "人気No.1", highlight: true },
+  { time: "60分", name: "禅巡", price: "¥6,980", label: "満足コース" },
 ];
 
 const FAQS = [
   { q: "遅刻した場合は？", a: "遅刻分は施術時間が短くなる場合があります。余裕をもってお越しください。" },
-  { q: "支払い方法は？", a: "予約画面（Square）にてご確認ください。" },
-  { q: "荷物預かりはできますか？", a: "営業時間内（10:00–20:00）で可能です（スペースに限りあり）。" },
-  { q: "オイルは使いますか？", a: "使用しません。ドライ施術のため、髪や服が汚れません。" },
-  { q: "予約なしで行けますか？", a: "完全予約制となっております。事前のご予約をお願いします。" },
+  { q: "支払い方法は？", a: "現金、クレジットカード、Square QR決済に対応しています。一部モバイル決済・交通系ICはご利用いただけません。" },
+  { q: "荷物預かりはできますか？", a: "営業時間内（10:00–20:00）に荷物をお預かりできます。" },
+  { q: "頭にオイルは使いますか？", a: "頭部はオイル・水を使わないドライヘッドスパです。髪や服が汚れません。なお、足元ケアにはココナッツオイルを使用するメニューがございます。" },
+  { q: "予約なしで行けますか？", a: "完全予約制となっております。事前のご予約をおすすめします。" },
 ];
 
 export default function JpPage() {
@@ -248,7 +248,7 @@ export default function JpPage() {
             </div>
           </AnimatedSection>
 
-          <div className="grid gap-4 mb-8">
+          <div className="grid gap-4 mb-4">
             {MENUS.map((m, i) => (
               <AnimatedSection key={i} delay={i * 100}>
                 <div
@@ -258,23 +258,27 @@ export default function JpPage() {
                       : "border-[#EDE8DC]/15 bg-[#EDE8DC]/5"
                   }`}
                 >
-                  {m.highlight && (
-                    <span className="absolute -top-3 left-4 bg-[#D4A853] text-[#0D1220] text-xs font-bold px-3 py-0.5 rounded-full">
-                      おすすめ
-                    </span>
-                  )}
-                  {m.label && !m.highlight && (
-                    <span className="absolute -top-3 left-4 bg-[#EDE8DC]/20 text-[#EDE8DC] text-xs px-3 py-0.5 rounded-full">
+                  {m.label && (
+                    <span
+                      className={`absolute -top-3 left-4 text-xs font-bold px-3 py-0.5 rounded-full ${
+                        m.highlight
+                          ? "bg-[#D4A853] text-[#0D1220]"
+                          : "bg-[#EDE8DC]/20 text-[#EDE8DC]"
+                      }`}
+                    >
                       {m.label}
                     </span>
                   )}
                   <div className="flex items-center justify-between">
-                    <span
-                      className="text-[#EDE8DC] text-lg font-medium"
-                      style={{ fontFamily: "'Noto Serif JP', serif" }}
-                    >
-                      {m.time}
-                    </span>
+                    <div>
+                      <span
+                        className="text-[#EDE8DC] text-base font-medium block"
+                        style={{ fontFamily: "'Noto Serif JP', serif" }}
+                      >
+                        {m.name}
+                      </span>
+                      <span className="text-[#EDE8DC]/50 text-sm">{m.time}</span>
+                    </div>
                     <span className="text-[#D4A853] text-xl font-bold">
                       {m.price}
                     </span>
@@ -283,6 +287,13 @@ export default function JpPage() {
               </AnimatedSection>
             ))}
           </div>
+
+          {/* Option note */}
+          <AnimatedSection delay={300}>
+            <p className="text-[#EDE8DC]/50 text-xs text-center mb-8">
+              ＋ 足元ほぐし15分延長オプションあり
+            </p>
+          </AnimatedSection>
 
           {/* CTA — Middle */}
           <AnimatedSection>
@@ -313,11 +324,16 @@ export default function JpPage() {
                 アクセス
               </h2>
             </div>
-            <div className="p-5 border border-[#D4A853]/20 rounded-sm bg-[#1A1F2E]/50">
+            <div className="p-5 border border-[#D4A853]/20 rounded-sm bg-[#1A1F2E]/50 space-y-2">
               <p className="text-[#EDE8DC]/85 leading-relaxed">
-                <span className="text-[#D4A853] font-medium">鹿児島中央駅から徒歩約3分。</span><br />
-                武ステーションビル 2F 203（yoru+禅）<br />
-                <span className="text-[#EDE8DC]/50 text-sm">営業時間：10:00–20:00</span>
+                <span className="text-[#D4A853] font-medium">鹿児島中央駅から徒歩約3分。</span>
+              </p>
+              <p className="text-[#EDE8DC]/85 leading-relaxed">
+                武ステーションビル 2F 203（yoru+禅）
+              </p>
+              <p className="text-[#EDE8DC]/50 text-sm">営業時間：10:00–20:00</p>
+              <p className="text-[#D4A853]/70 text-sm pt-1">
+                初めての方はご予約後に道順もご案内します。
               </p>
             </div>
           </AnimatedSection>
@@ -389,9 +405,6 @@ export default function JpPage() {
             <div className="flex justify-center">
               <CTAButton href={SQUARE_DOMESTIC_URL}>予約する</CTAButton>
             </div>
-            <p className="mt-4 text-[#EDE8DC]/30 text-xs">
-              予約はSquareで確定します。
-            </p>
           </AnimatedSection>
         </div>
       </section>
@@ -405,7 +418,7 @@ export default function JpPage() {
           yoru+禅
         </p>
         <p className="text-[#EDE8DC]/40 text-xs">
-          武ステーションビル 2F 203 | 10:00–20:00
+          武ステーションビル2F 203 / 10:00–20:00
         </p>
         <div className="mt-4">
           <Link href="/go">
