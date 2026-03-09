@@ -8,7 +8,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 
-const SQUARE_TRAVEL_URL = "[SQUARE_TRAVEL_URL]";
+const SQUARE_TRAVEL_URL = "https://app.squareup.com/appointments/buyer/widget/63dw09zlelpueg/LHKH7J4ZZ160Y";
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/hero-travel-ikS4KAjfKZKreZPJacWxYk.webp";
 const MENU_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/menu-bg-c69VwCk2UsoNzVnr7L95ma.webp";
 
@@ -49,8 +49,6 @@ function CTAButton({ href, children, sub }: { href: string; children: React.Reac
   return (
     <a
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
       className="zen-shimmer inline-block w-full max-w-sm bg-[#D4A853] text-[#0D1220] font-bold text-center py-4 px-8 rounded-sm tracking-wide hover:bg-[#E5BC6A] transition-colors duration-300 shadow-lg shadow-[#D4A853]/20"
       style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.05rem" }}
     >
@@ -411,8 +409,6 @@ export default function TravelPage() {
               <div className="mt-4">
                 <a
                   href={SQUARE_TRAVEL_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="zen-shimmer inline-block bg-[#D4A853] text-[#0D1220] font-bold py-3 px-6 rounded-sm text-sm hover:bg-[#E5BC6A] transition-colors"
                   style={{ fontFamily: "'Noto Serif TC', serif" }}
                 >
@@ -444,8 +440,6 @@ export default function TravelPage() {
               <div className="mt-4">
                 <a
                   href={SQUARE_TRAVEL_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="zen-shimmer inline-block bg-[#D4A853] text-[#0D1220] font-bold py-3 px-6 rounded-sm text-sm hover:bg-[#E5BC6A] transition-colors"
                   style={{ fontFamily: "'Noto Sans KR', sans-serif" }}
                 >
