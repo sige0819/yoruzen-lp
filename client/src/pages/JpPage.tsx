@@ -8,7 +8,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 
-const SQUARE_DOMESTIC_URL = "https://app.squareup.com/appointments/book/z9c4cy9xdl0hbw/LHKH7J4ZZ160Y/start";
+const SQUARE_DOMESTIC_URL = "https://app.squareup.com/appointments/buyer/widget/ztpq06tczlisjz/LHKH7J4ZZ160Y";
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/hero-jp-bynSTbojrzBKK6QbqjbEYZ.webp";
 const MENU_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/menu-bg-c69VwCk2UsoNzVnr7L95ma.webp";
 
