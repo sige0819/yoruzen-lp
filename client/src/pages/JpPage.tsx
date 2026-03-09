@@ -8,7 +8,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 
-const SQUARE_DOMESTIC_URL = "[SQUARE_DOMESTIC_URL]";
+const SQUARE_DOMESTIC_URL = "https://app.squareup.com/appointments/book/z9c4cy9xdl0hbw/LHKH7J4ZZ160Y/start";
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/hero-jp-bynSTbojrzBKK6QbqjbEYZ.webp";
 const MENU_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/menu-bg-c69VwCk2UsoNzVnr7L95ma.webp";
 
@@ -49,8 +49,6 @@ function CTAButton({ href, children }: { href: string; children: React.ReactNode
   return (
     <a
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
       className="zen-shimmer inline-block w-full max-w-sm bg-[#D4A853] text-[#0D1220] font-bold text-center py-4 px-8 rounded-sm tracking-widest hover:bg-[#E5BC6A] transition-colors duration-300 shadow-lg shadow-[#D4A853]/20"
       style={{ fontFamily: "'Noto Serif JP', serif", fontSize: "1.05rem" }}
     >
