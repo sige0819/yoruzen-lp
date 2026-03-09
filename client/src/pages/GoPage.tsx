@@ -13,6 +13,9 @@ export default function GoPage() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    document.title = "yoru+禅 ドライヘッドスパ｜鹿児島中央駅徒歩3分・完全個室";
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc) desc.setAttribute('content', '鹿児島中央駅から徒歩約3分のドライヘッドスパ「yoru+禅」。完全個室・1枠1名。眼精疲労・首肩疲れ・眠りの浅さにアプローチ。英語対応・荷物預かりあり。');
     const t = setTimeout(() => setVisible(true), 100);
     return () => clearTimeout(t);
   }, []);

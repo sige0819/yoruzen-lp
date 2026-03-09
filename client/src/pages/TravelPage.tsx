@@ -114,6 +114,9 @@ export default function TravelPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
+    document.title = "Dry Head Spa Kagoshima | yoru+禅 — 3 min from Kagoshima-Chuo Station";
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc) desc.setAttribute('content', 'Private dry head spa near Kagoshima-Chuo Station. No oil, no water on hair. English support available. Luggage storage during business hours. Book online via Square.');
     const t = setTimeout(() => setHeroVisible(true), 100);
     return () => clearTimeout(t);
   }, []);
