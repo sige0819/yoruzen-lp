@@ -384,6 +384,29 @@ export default function JpPage() {
         </div>
       </section>
 
+      {/* ===== 補助リンク集 ===== */}
+      <section className="bg-[#0D1220]/60 py-10 border-t border-[#EDE8DC]/8">
+        <div className="container">
+          <AnimatedSection>
+            <p className="text-[#EDE8DC]/40 text-xs tracking-[0.2em] uppercase mb-5 text-center">詳しく知りたい方へ</p>
+            <div className="grid grid-cols-2 gap-3 max-w-sm mx-auto">
+              {[
+                { href: "/jp/first", label: "はじめての方へ" },
+                { href: "/jp/access", label: "アクセス案内" },
+                { href: "/jp/faq", label: "よくある質問" },
+                { href: "/jp/about", label: "店舗について" },
+              ].map((link) => (
+                <Link key={link.href} href={link.href}>
+                  <div className="border border-[#EDE8DC]/10 rounded-sm px-4 py-3 text-center hover:border-[#D4A853]/40 hover:bg-[#EDE8DC]/3 transition-colors cursor-pointer">
+                    <span className="text-[#EDE8DC]/60 text-xs hover:text-[#D4A853] transition-colors">{link.label}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* ===== FINAL CTA ===== */}
       <section
         className="relative py-20 text-center"
@@ -423,9 +446,23 @@ export default function JpPage() {
         <p className="text-[#EDE8DC]/40 text-xs">
           武ステーションビル2F 203 / 10:00–20:00
         </p>
-        <div className="mt-4">
+        <div className="mt-4 flex flex-wrap justify-center gap-4">
+          <Link href="/jp/first">
+            <span className="text-[#EDE8DC]/30 text-xs hover:text-[#D4A853] transition-colors">はじめての方へ</span>
+          </Link>
+          <Link href="/jp/access">
+            <span className="text-[#EDE8DC]/30 text-xs hover:text-[#D4A853] transition-colors">アクセス</span>
+          </Link>
+          <Link href="/jp/faq">
+            <span className="text-[#EDE8DC]/30 text-xs hover:text-[#D4A853] transition-colors">FAQ</span>
+          </Link>
+          <Link href="/jp/about">
+            <span className="text-[#EDE8DC]/30 text-xs hover:text-[#D4A853] transition-colors">店舗について</span>
+          </Link>
+        </div>
+        <div className="mt-3">
           <Link href="/go">
-            <span className="text-[#EDE8DC]/30 text-xs hover:text-[#D4A853] transition-colors">
+            <span className="text-[#EDE8DC]/20 text-xs hover:text-[#D4A853] transition-colors">
               ← 言語選択に戻る
             </span>
           </Link>
