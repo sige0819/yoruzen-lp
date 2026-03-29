@@ -155,6 +155,24 @@ export default function JpPage() {
 
           {/* CTA — Top */}
           <CTAButton href={SQUARE_DOMESTIC_URL}>予約する</CTAButton>
+          <a
+            href="https://lin.ee/N4c38Dc"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block w-full max-w-sm text-center py-4 px-8 rounded-sm tracking-widest transition-colors duration-300"
+            style={{
+              fontFamily: "'Noto Serif JP', serif",
+              fontSize: "1.05rem",
+              marginTop: "0.75rem",
+              border: "1px solid rgba(212, 168, 83, 0.45)",
+              color: "rgba(237, 232, 220, 0.75)",
+              background: "transparent",
+            }}
+            onMouseEnter={e => (e.currentTarget.style.background = "rgba(212, 168, 83, 0.08)")}
+            onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+          >
+            LINEで空き状況を確認
+          </a>
         </div>
       </section>
 
@@ -300,8 +318,26 @@ export default function JpPage() {
 
           {/* CTA — Middle */}
           <AnimatedSection>
-            <div className="flex justify-center">
+            <div className="flex flex-col items-center">
               <CTAButton href={SQUARE_DOMESTIC_URL}>予約する</CTAButton>
+              <a
+                href="https://lin.ee/N4c38Dc"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block w-full max-w-sm text-center py-4 px-8 rounded-sm tracking-widest transition-colors duration-300"
+                style={{
+                  fontFamily: "'Noto Serif JP', serif",
+                  fontSize: "1.05rem",
+                  marginTop: "0.75rem",
+                  border: "1px solid rgba(212, 168, 83, 0.45)",
+                  color: "rgba(237, 232, 220, 0.75)",
+                  background: "transparent",
+                }}
+                onMouseEnter={e => (e.currentTarget.style.background = "rgba(212, 168, 83, 0.08)")}
+                onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+              >
+                LINEで空き状況を確認
+              </a>
             </div>
           </AnimatedSection>
         </div>
@@ -428,8 +464,26 @@ export default function JpPage() {
             <p className="text-[#EDE8DC]/60 text-sm mb-8">
               完全個室・1枠1名のプライベート空間でお待ちしています。
             </p>
-            <div className="flex justify-center">
+            <div className="flex flex-col items-center">
               <CTAButton href={SQUARE_DOMESTIC_URL}>予約する</CTAButton>
+              <a
+                href="https://lin.ee/N4c38Dc"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block w-full max-w-sm text-center py-4 px-8 rounded-sm tracking-widest transition-colors duration-300"
+                style={{
+                  fontFamily: "'Noto Serif JP', serif",
+                  fontSize: "1.05rem",
+                  marginTop: "0.75rem",
+                  border: "1px solid rgba(212, 168, 83, 0.45)",
+                  color: "rgba(237, 232, 220, 0.75)",
+                  background: "transparent",
+                }}
+                onMouseEnter={e => (e.currentTarget.style.background = "rgba(212, 168, 83, 0.08)")}
+                onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+              >
+                LINEで空き状況を確認
+              </a>
             </div>
           </AnimatedSection>
         </div>
