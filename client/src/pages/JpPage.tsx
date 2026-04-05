@@ -70,9 +70,9 @@ const FEATURES = [
 ];
 
 const MENUS = [
-  { time: "30分", name: "クイックリセット", price: "¥3,980", label: "" },
-  { time: "45分", name: "禅睡", price: "¥4,980", label: "人気No.1", highlight: true },
-  { time: "60分", name: "禅巡", price: "¥6,980", label: "満足コース" },
+  { time: "30分", name: "クイックリセット", price: "¥3,980", label: "", desc: "仕事帰りや隙間時間に。頭の緊張をほぐすショートコース。" },
+  { time: "45分", name: "禅睡", price: "¥4,980", label: "人気No.1", highlight: true, desc: "眼精疲労・首肩こりに。最も多くの方に選ばれている定番コース。" },
+  { time: "60分", name: "禅巡", price: "¥6,980", label: "満足コース", desc: "頭・首・肩をじっくりほぐす。深い眠りへの準備に最適な贅沢コース。" },
 ];
 
 const FAQS = [
@@ -155,24 +155,6 @@ export default function JpPage() {
 
           {/* CTA — Top */}
           <CTAButton href={SQUARE_DOMESTIC_URL}>予約する</CTAButton>
-          <a
-            href="https://lin.ee/N4c38Dc"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block w-full max-w-sm text-center py-4 px-8 rounded-sm tracking-widest transition-colors duration-300"
-            style={{
-              fontFamily: "'Noto Serif JP', serif",
-              fontSize: "1.05rem",
-              marginTop: "0.75rem",
-              border: "1px solid rgba(212, 168, 83, 0.45)",
-              color: "rgba(237, 232, 220, 0.75)",
-              background: "transparent",
-            }}
-            onMouseEnter={e => (e.currentTarget.style.background = "rgba(212, 168, 83, 0.08)")}
-            onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-          >
-            LINEで空き状況を確認
-          </a>
         </div>
       </section>
 
@@ -290,7 +272,7 @@ export default function JpPage() {
                       {m.label}
                     </span>
                   )}
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between mb-2">
                     <div>
                       <span
                         className="text-[#EDE8DC] text-base font-medium block"
@@ -304,6 +286,11 @@ export default function JpPage() {
                       {m.price}
                     </span>
                   </div>
+                  {m.desc && (
+                    <p className="text-[#EDE8DC]/55 text-xs leading-relaxed border-t border-[#EDE8DC]/10 pt-2">
+                      {m.desc}
+                    </p>
+                  )}
                 </div>
               </AnimatedSection>
             ))}
@@ -316,29 +303,82 @@ export default function JpPage() {
             </p>
           </AnimatedSection>
 
+          {/* 初回特典バナー — Middle */}
+          <AnimatedSection delay={350}>
+            <div
+              className="mb-5 px-5 py-3 rounded-sm text-center"
+              style={{
+                border: "1px solid rgba(212, 168, 83, 0.35)",
+                background: "rgba(212, 168, 83, 0.06)",
+              }}
+            >
+              <p
+                className="text-[#D4A853] text-sm"
+                style={{ fontFamily: "'Noto Serif JP', serif" }}
+              >
+                ✦ 初回の方限定
+              </p>
+              <p className="text-[#EDE8DC]/80 text-sm mt-0.5">
+                足元ほぐし（+15分）を無料でお試しいただけます
+              </p>
+              <p className="text-[#EDE8DC]/45 text-xs mt-1">ご予約時にお申し付けください</p>
+            </div>
+          </AnimatedSection>
+
           {/* CTA — Middle */}
           <AnimatedSection>
-            <div className="flex flex-col items-center">
-              <CTAButton href={SQUARE_DOMESTIC_URL}>予約する</CTAButton>
-              <a
-                href="https://lin.ee/N4c38Dc"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block w-full max-w-sm text-center py-4 px-8 rounded-sm tracking-widest transition-colors duration-300"
-                style={{
-                  fontFamily: "'Noto Serif JP', serif",
-                  fontSize: "1.05rem",
-                  marginTop: "0.75rem",
-                  border: "1px solid rgba(212, 168, 83, 0.45)",
-                  color: "rgba(237, 232, 220, 0.75)",
-                  background: "transparent",
-                }}
-                onMouseEnter={e => (e.currentTarget.style.background = "rgba(212, 168, 83, 0.08)")}
-                onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-              >
-                LINEで空き状況を確認
-              </a>
+            <div className="flex flex-col items-center">             <CTAButton href={SQUARE_DOMESTIC_URL}>予約する</CTAButton>
             </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ===== REVIEWS ===== */}
+      <section className="relative bg-[#1A1F2E] py-16">
+        <div className="container">
+          <AnimatedSection>
+            <div className="flex items-center gap-3 mb-8">
+              <span className="w-8 h-px bg-[#D4A853]" />
+              <h2
+                className="text-xl font-medium text-[#EDE8DC]"
+                style={{ fontFamily: "'Noto Serif JP', serif" }}
+              >
+                お客様の声
+              </h2>
+            </div>
+          </AnimatedSection>
+          <div className="grid gap-4">
+            {[
+              { text: "頭が軽くなって驚きました。完全個室でリラックスできて最高です。また来ます。", attr: "30代女性", stars: 5 },
+              { text: "仕事帰りに通ってます。45分コースがちょうど良い長さで、終わった後は本当にすっきりします。", attr: "40代男性", stars: 5 },
+              { text: "海外から来ましたが英語で対応してもらえて安心しました。技術も素晴らしかったです。", attr: "Tourist", stars: 5 },
+            ].map((r, i) => (
+              <AnimatedSection key={i} delay={i * 100}>
+                <div
+                  className="p-5 rounded-sm"
+                  style={{
+                    border: "1px solid rgba(212, 168, 83, 0.2)",
+                    background: "rgba(212, 168, 83, 0.04)",
+                  }}
+                >
+                  <div className="flex gap-0.5 mb-3">
+                    {Array.from({ length: r.stars }).map((_, j) => (
+                      <span key={j} className="text-[#D4A853] text-sm">★</span>
+                    ))}
+                  </div>
+                  <p
+                    className="text-[#EDE8DC]/85 text-sm leading-relaxed mb-3"
+                    style={{ fontFamily: "'Noto Serif JP', serif" }}
+                  >
+                    「{r.text}」
+                  </p>
+                  <p className="text-[#EDE8DC]/45 text-xs">— {r.attr}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+          <AnimatedSection delay={300}>
+            <p className="text-[#EDE8DC]/35 text-xs text-center mt-6">Google口コミより</p>
           </AnimatedSection>
         </div>
       </section>
@@ -464,26 +504,8 @@ export default function JpPage() {
             <p className="text-[#EDE8DC]/60 text-sm mb-8">
               完全個室・1枠1名のプライベート空間でお待ちしています。
             </p>
-            <div className="flex flex-col items-center">
+            <div className="flex justify-center">
               <CTAButton href={SQUARE_DOMESTIC_URL}>予約する</CTAButton>
-              <a
-                href="https://lin.ee/N4c38Dc"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block w-full max-w-sm text-center py-4 px-8 rounded-sm tracking-widest transition-colors duration-300"
-                style={{
-                  fontFamily: "'Noto Serif JP', serif",
-                  fontSize: "1.05rem",
-                  marginTop: "0.75rem",
-                  border: "1px solid rgba(212, 168, 83, 0.45)",
-                  color: "rgba(237, 232, 220, 0.75)",
-                  background: "transparent",
-                }}
-                onMouseEnter={e => (e.currentTarget.style.background = "rgba(212, 168, 83, 0.08)")}
-                onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-              >
-                LINEで空き状況を確認
-              </a>
             </div>
           </AnimatedSection>
         </div>
