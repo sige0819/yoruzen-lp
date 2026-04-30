@@ -68,32 +68,54 @@ const WHY_US = [
   { icon: "🥥", text: "Coconut-oil foot care available" },
 ];
 
+// ★ Travel visitor test price (1,000-yen increments)
 const MENUS_EN = [
   {
-    name: "Hilot Quick Reset",
-    time: "30 min",
-    price: "¥7,000",
+    name: "Hilot",
+    time: "60 min",
+    price: "¥13,000",
     highlight: false,
     label: "",
-    desc: "Traditional Filipino Hilot healing for travelers. Relieves jet lag, head heaviness, and walking fatigue.",
+    desc: "Traditional Filipino Hilot healing. Warm palms and plant oil restore the flow of your body. Ideal for travel fatigue, stiff neck/shoulders, and deep relaxation.",
   },
   {
-    name: "Hilot Traveler Recovery",
-    time: "45 min",
-    price: "¥9,000",
+    name: "Hilot",
+    time: "90 min",
+    price: "¥18,000",
     highlight: true,
     label: "★ Recommended",
-    desc: "Hilot full-body healing with carbonated scalp spray. Deeply relaxing — ideal for neck/shoulder fatigue and travel recovery.",
+    desc: "Full-body Hilot session — the most popular choice for travelers. Deeply restoring, with English support throughout.",
   },
   {
-    name: "Hilot Japanese Rest Experience",
-    time: "60 min",
-    price: "¥12,000",
+    name: "Hilot",
+    time: "120 min",
+    price: "¥25,000",
     highlight: false,
     label: "",
-    desc: "Hilot healing with coconut-oil foot care in a private room. The most complete restoration experience, with English support.",
+    desc: "The ultimate Hilot experience. Ideal for those who want to fully unwind after a long journey.",
   },
 ];
+
+const COMBO_MENUS_EN = [
+  {
+    name: "Hilot & Head Spa Ritual",
+    time: "90 min",
+    price: "¥20,000",
+    highlight: false,
+    label: "Combo",
+    desc: "Hilot 60 min + Dry Head Spa 30 min. Body and mind restoration in one session.",
+  },
+  {
+    name: "Hilot & Head Spa Ritual",
+    time: "120 min",
+    price: "¥25,000",
+    highlight: false,
+    label: "Combo",
+    desc: "Hilot 90 min + Dry Head Spa 30 min. The most complete full-body and scalp restoration.",
+  },
+];
+
+const OPTION_EN = { name: "Banana Leaf Footment", price: "+¥3,000", desc: "Traditional Filipino banana leaf foot wrap. Available with Hilot and Combo courses." };
 
 const FAQS_EN = [
   { q: "Can I bring luggage?", a: "Yes, luggage storage is available during business hours (10:00–20:00)." },
@@ -189,7 +211,7 @@ export default function TravelPage() {
           </p>
 
           {/* CTA — Top */}
-          <CTAButton href={SQUARE_TRAVEL_URL} sub="45 min Hilot Traveler Recovery — ¥9,000">
+          <CTAButton href={SQUARE_TRAVEL_URL} sub="Hilot 90 min — ¥18,000">
             Book Now
           </CTAButton>
         </div>
@@ -252,7 +274,15 @@ export default function TravelPage() {
             </div>
           </AnimatedSection>
 
-          <div className="grid gap-5 mb-8">
+          {/* Test price notice */}
+          <AnimatedSection>
+            <p className="text-[#D4A853]/60 text-xs mb-6 border border-[#D4A853]/20 rounded-sm px-4 py-2 bg-[#D4A853]/5">
+              ★ Travel visitor test price — prices shown are for international visitors.
+            </p>
+          </AnimatedSection>
+
+          {/* Hilot main menus */}
+          <div className="grid gap-5 mb-6">
             {MENUS_EN.map((m, i) => (
               <AnimatedSection key={i} delay={i * 100}>
                 <div
@@ -287,10 +317,46 @@ export default function TravelPage() {
             ))}
           </div>
 
+          {/* Combo menus */}
+          <AnimatedSection>
+            <p className="text-[#D4A853]/70 text-xs tracking-widest uppercase mb-3">Combo Courses</p>
+          </AnimatedSection>
+          <div className="grid gap-4 mb-6">
+            {COMBO_MENUS_EN.map((m, i) => (
+              <AnimatedSection key={i} delay={i * 80}>
+                <div className="relative p-4 rounded-sm border border-[#D4A853]/30 bg-[#D4A853]/5">
+                  <span className="absolute -top-2.5 left-3 bg-[#1A1F2E] text-[#D4A853] text-xs px-2 border border-[#D4A853]/40 rounded-full">{m.label}</span>
+                  <div className="flex items-start justify-between gap-2 mb-2">
+                    <div>
+                      <div className="text-[#EDE8DC] text-sm font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>{m.name}</div>
+                      <div className="text-[#EDE8DC]/50 text-xs">{m.time}</div>
+                    </div>
+                    <span className="text-[#D4A853] text-lg font-bold flex-shrink-0">{m.price}</span>
+                  </div>
+                  <p className="text-[#EDE8DC]/55 text-xs leading-relaxed border-t border-[#EDE8DC]/10 pt-2">{m.desc}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          {/* Option */}
+          <AnimatedSection>
+            <div className="p-4 border border-dashed border-[#D4A853]/30 rounded-sm bg-[#D4A853]/5 mb-8">
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <p className="text-[#D4A853] text-xs tracking-widest uppercase mb-1">Option</p>
+                  <p className="text-[#EDE8DC] text-sm font-medium">{OPTION_EN.name}</p>
+                  <p className="text-[#EDE8DC]/55 text-xs mt-1 leading-relaxed">{OPTION_EN.desc}</p>
+                </div>
+                <span className="text-[#D4A853] font-bold text-base flex-shrink-0">{OPTION_EN.price}</span>
+              </div>
+            </div>
+          </AnimatedSection>
+
           {/* CTA — Middle */}
           <AnimatedSection>
             <div className="flex justify-center">
-              <CTAButton href={SQUARE_TRAVEL_URL} sub="45 min Hilot — ¥9,000">
+              <CTAButton href={SQUARE_TRAVEL_URL} sub="Hilot 90 min — ¥18,000">
                 Book Now
               </CTAButton>
             </div>
@@ -415,8 +481,7 @@ export default function TravelPage() {
                 style={{ fontFamily: "'Noto Serif TC', serif" }}
               >
                 <span className="text-[#D4A853] font-medium">鹿兒島中央站步行約3分鐘。</span>
-                傳統菲律賓希洛特（Hilot）療癒按摩。不使用精油、不弄濕頭髮。一個時段只接待一位客人，安靜私密。可英文溝通。營業時間內可寄放行李（10:00–20:00）。含碳酸頭皮護理噴霧，另有椰子油足部護理選項。推薦 <span className="text-[#D4A853] font-medium">45分鐘希洛特旅行恢復療程（¥9,000）</span>。
-              </p>
+                傳統菲律賓希洛特（Hilot）療癒按摩。不使用精油、不弄濕頭髮。一個時段只接待一位客人，安靜私密。可英文溝通。營業時間內可寄放行李（10:00–20:00）。含碳酸頭皮護理噴霧，另有椰子              推薦 <span className="text-[#D4A853] font-medium">90分鐘希洛特療程（¥18,000）</span>。         </p>
               <div className="mt-4">
                 <a
                   href={SQUARE_TRAVEL_URL}
@@ -446,7 +511,7 @@ export default function TravelPage() {
               >
                 <span className="text-[#D4A853] font-medium">가고시마추오역에서 도보 약 3분.</span>{" "}
                 전통 필리핀 힐롯(Hilot) 힐링 마사지. 오일/물 없이 받는 드라이 헤드 스파로 머리카락이 젖지 않습니다. 1타임 1명 프라이빗 룸. 영어 가능. 영업시간 내 짐 보관 가능(10:00–20:00). 탄산 두피 스프레이 포함, 코코넛 오일 발 케어 옵션도 있습니다.{" "}
-                <span className="text-[#D4A853] font-medium">45분 힐롯 여행 회복 코스 추천（¥9,000）.</span>
+                <span className="text-[#D4A853] font-medium">90분 힐롯 코스 추천（¥18,000）.</span>
               </p>
               <div className="mt-4">
                 <a
@@ -479,13 +544,13 @@ export default function TravelPage() {
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Restore your body.<br />
-              <span className="text-[#D4A853]">Hilot in 45 minutes.</span>
+              <span className="text-[#D4A853]">Traditional Hilot Healing.</span>
             </h2>
             <p className="text-[#EDE8DC]/55 text-sm mb-8">
               Private room · English OK · Near Kagoshima-Chuo Station
             </p>
             <div className="flex justify-center">
-              <CTAButton href={SQUARE_TRAVEL_URL} sub="45 min Hilot Recovery — ¥9,000">
+              <CTAButton href={SQUARE_TRAVEL_URL} sub="Hilot 90 min — ¥18,000">
                 Book Now
               </CTAButton>
             </div>
