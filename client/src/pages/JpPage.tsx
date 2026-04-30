@@ -12,7 +12,7 @@ const SQUARE_DOMESTIC_URL = "https://app.squareup.com/appointments/buyer/widget/
 const LINE_URL = "https://line.me/R/ti/p/@308fgdko";
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/hilot-fv-new-Aq2zeCx2FgSffDqQcZzBs2.webp";
 const HILOT_ABOUT_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/hilot-about-new-dpBYyRcFNqiAYM2sq5UKW5.webp";
-const THERAPIST_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/hilot-therapist-new-cUoWK5ndRkihj3pwFQv2Ur.webp";
+const THERAPIST_IMG = "/manus-storage/therapist-piso_fa8b8f26.png";
 const HILOT_MENU_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/hilot-menu-hilot-KyxBwfCdfohWxiizvh6WgE.webp";
 const DRY_MENU_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/hilot-menu-dry-ZzAy3xzWADj7TPfPAfavxn.webp";
 
@@ -53,8 +53,20 @@ function CTAButton({ href, children }: { href: string; children: React.ReactNode
   return (
     <a
       href={href}
-      className="zen-shimmer inline-block w-full max-w-sm bg-[#D4A853] text-[#0D1220] font-bold text-center py-4 px-8 rounded-sm tracking-widest hover:bg-[#E5BC6A] transition-colors duration-300 shadow-lg shadow-[#D4A853]/20"
-      style={{ fontFamily: "'Noto Serif JP', serif", fontSize: "1.05rem" }}
+      className="inline-block w-full max-w-sm text-[#EDE8DC] font-medium text-center py-3.5 px-8 rounded-sm tracking-widest transition-all duration-300"
+      style={{
+        fontFamily: "'Noto Serif JP', serif",
+        fontSize: "0.9rem",
+        border: "1px solid rgba(212,168,83,0.35)",
+        background: "rgba(212,168,83,0.05)",
+        marginTop: "0.75rem",
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLAnchorElement).style.background = "rgba(212,168,83,0.10)";
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLAnchorElement).style.background = "rgba(212,168,83,0.05)";
+      }}
     >
       {children}
     </a>
@@ -65,24 +77,23 @@ function LineButton({ href }: { href: string }) {
   return (
     <a
       href={href}
-      className="inline-flex items-center justify-center gap-2 w-full max-w-sm py-3.5 px-8 rounded-sm transition-all duration-300"
+      className="zen-shimmer inline-flex items-center justify-center gap-2 w-full max-w-sm py-4 px-8 rounded-sm transition-all duration-300 shadow-lg shadow-[#06C755]/20"
       style={{
-        border: "1px solid rgba(212,168,83,0.45)",
-        background: "rgba(212,168,83,0.04)",
-        color: "#EDE8DC",
+        background: "#06C755",
+        color: "#fff",
         fontFamily: "'Noto Serif JP', serif",
-        fontSize: "0.95rem",
+        fontSize: "1.05rem",
+        fontWeight: "bold",
         letterSpacing: "0.1em",
-        marginTop: "0.75rem",
       }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.background = "rgba(212,168,83,0.10)";
+        (e.currentTarget as HTMLAnchorElement).style.background = "#05b34c";
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.background = "rgba(212,168,83,0.04)";
+        (e.currentTarget as HTMLAnchorElement).style.background = "#06C755";
       }}
     >
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{ color: "#06C755", flexShrink: 0 }}>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0 }}>
         <path d="M12 2C6.48 2 2 6.03 2 11c0 3.01 1.55 5.67 3.95 7.38L5 21l2.73-1.36C9.05 20.19 10.49 20.5 12 20.5c5.52 0 10-4.03 10-9S17.52 2 12 2zm1 13H7v-1.5h6V15zm2-3H7v-1.5h8V12zm0-3H7V7.5h8V9z"/>
       </svg>
       LINEで予約・お問い合わせ
@@ -263,8 +274,8 @@ export default function JpPage() {
 
           {/* CTA — Top */}
           <div className="flex flex-col items-start">
-            <CTAButton href={SQUARE_DOMESTIC_URL}>予約する</CTAButton>
             <LineButton href={LINE_URL} />
+            <CTAButton href={SQUARE_DOMESTIC_URL}>Squareで予約する</CTAButton>
           </div>
         </div>
       </section>
@@ -422,12 +433,13 @@ export default function JpPage() {
 
           <div className="flex flex-col md:flex-row gap-6 items-start">
             <AnimatedSection delay={100} className="w-full md:w-2/5">
-              <div className="rounded-sm overflow-hidden" style={{ maxHeight: "320px" }}>
+              <div className="rounded-sm overflow-hidden" style={{ maxHeight: "360px" }}>
                 <img
                   src={THERAPIST_IMG}
-                  alt="セラピスト"
+                  alt="セラピスト ぴそ"
                   className="w-full h-full object-cover object-top"
                   loading="lazy"
+                  style={{ objectPosition: "center top" }}
                 />
               </div>
             </AnimatedSection>
@@ -443,7 +455,7 @@ export default function JpPage() {
                   className="text-[#EDE8DC] text-lg font-bold mb-3"
                   style={{ fontFamily: "'Noto Serif JP', serif" }}
                 >
-                  マニラ10年の現役経験
+                  ぴそ — マニラ10年の現役経験
                 </p>
                 <p className="text-[#EDE8DC]/70 text-sm leading-relaxed">
                   フィリピン・マニラで10年にわたりヒロットを実践してきた経験を持つセラピストが担当します。異国の伝統を、和モダンの静かな個室でそのままお届けします。
@@ -666,8 +678,8 @@ export default function JpPage() {
           {/* CTA — Middle */}
           <AnimatedSection>
             <div className="flex flex-col items-center">
-              <CTAButton href={SQUARE_DOMESTIC_URL}>予約する</CTAButton>
               <LineButton href={LINE_URL} />
+              <CTAButton href={SQUARE_DOMESTIC_URL}>Squareで予約する</CTAButton>
             </div>
           </AnimatedSection>
         </div>
@@ -847,8 +859,8 @@ export default function JpPage() {
               完全個室・1枠1名のプライベート空間でお待ちしています。
             </p>
             <div className="flex flex-col items-center">
-              <CTAButton href={SQUARE_DOMESTIC_URL}>予約する</CTAButton>
               <LineButton href={LINE_URL} />
+              <CTAButton href={SQUARE_DOMESTIC_URL}>Squareで予約する</CTAButton>
             </div>
           </AnimatedSection>
         </div>
