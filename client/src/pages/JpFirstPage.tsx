@@ -87,7 +87,7 @@ export default function JpFirstPage() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    document.title = "はじめての方へ｜yoru+禅 鹿児島ドライヘッドスパ";
+    document.title = "はじめての方へ｜ヒロット専門 yoru+禅 鹿児島中央駅";
     const desc = document.querySelector('meta[name="description"]');
     if (desc) desc.setAttribute('content', 'yoru+禅への初めての来店ガイド。予約方法・来店の流れ・服装・支払い方法・当日の注意点をわかりやすくご案内します。');
     const t = setTimeout(() => setVisible(true), 100);

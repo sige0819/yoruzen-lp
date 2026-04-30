@@ -1,14 +1,16 @@
 /*
  * /travel — 旅行者向けLP
- * Design: 夜桜の間 — 英語メイン + 繁体中文 + 한국어 パラグラフ
- * 訴求: 45min Traveler Recovery主役・迷子ゼロ道案内・言語不安解消
- * CTA: SQUARE_TRAVEL_URL × 上中下3箇所
+ * Design: 夜桜の間 — 英語メイン
+ * 訴求: Hilot専門・ヒロット施術・プライベート個室
+ * CTA: Square（メイン）× LINE（サブ）× 上中下3箇所
  */
 
 import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 
-const SQUARE_TRAVEL_URL = "https://app.squareup.com/appointments/buyer/widget/63dw09zlelpueg/LHKH7J4ZZ160Y";
+// Round 2: Square widget URLをJP版と統一
+const SQUARE_TRAVEL_URL = "https://app.squareup.com/appointments/buyer/widget/ztpq06tczlisjz/LHKH7J4ZZ160Y";
+const LINE_URL = "{{LINE_URL_TBD}}";
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/hero-travel-ikS4KAjfKZKreZPJacWxYk.webp";
 const MENU_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/menu-bg-c69VwCk2UsoNzVnr7L95ma.webp";
 
@@ -45,6 +47,7 @@ function AnimatedSection({ children, className = "", delay = 0 }: { children: Re
   );
 }
 
+// CTA案B: Travel版 = Square主・LINE副
 function CTAButton({ href, children, sub }: { href: string; children: React.ReactNode; sub?: string }) {
   return (
     <a
@@ -58,14 +61,29 @@ function CTAButton({ href, children, sub }: { href: string; children: React.Reac
   );
 }
 
+function LineSubButton({ href }: { href: string }) {
+  return (
+    <a
+      href={href}
+      className="inline-flex items-center justify-center gap-2 w-full max-w-sm border border-[#06C755]/50 text-[#06C755] text-sm font-medium py-3 px-6 rounded-sm hover:bg-[#06C755]/10 transition-colors duration-300"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+      </svg>
+      Questions? Contact via LINE
+    </a>
+  );
+}
+
+// Round 2: WHY_USから Luggage storage・Carbonated scalp spray・Coconut-oil foot care を削除
+// Round 2: "no oil on head" 誤記を修正
+// Round 2: healing → relaxation / restore → unwind
 const WHY_US = [
   { icon: "🚶", text: "3 min from Kagoshima-Chuo Station" },
   { icon: "🚪", text: "Private room (1 guest per slot)" },
-  { icon: "🌿", text: "Hilot — traditional Filipino healing massage. Deeply relaxing, no oil on head." },
+  { icon: "🌿", text: "Hilot — traditional Filipino oil ritual. A gentle, full-body relaxation using warm palms and plant oil to ease the body and quiet the mind." },
   { icon: "🗣️", text: "English support available" },
-  { icon: "🧳", text: "Luggage storage during business hours (10:00–20:00)" },
-  { icon: "✨", text: "Carbonated scalp spray included" },
-  { icon: "🥥", text: "Coconut-oil foot care available" },
+  { icon: "👩‍⚕️", text: "Therapist with 10 years of practice in Manila" },
 ];
 
 // ★ Travel visitor test price (1,000-yen increments)
@@ -76,7 +94,7 @@ const MENUS_EN = [
     price: "¥13,000",
     highlight: false,
     label: "",
-    desc: "Traditional Filipino Hilot healing. Warm palms and plant oil restore the flow of your body. Ideal for travel fatigue, stiff neck/shoulders, and deep relaxation.",
+    desc: "Traditional Filipino Hilot oil ritual. Warm palms and plant oil to ease the body and quiet the mind. Ideal for travel fatigue and deep relaxation. (test price for travel visitors)",
   },
   {
     name: "Hilot",
@@ -84,7 +102,7 @@ const MENUS_EN = [
     price: "¥18,000",
     highlight: true,
     label: "★ Recommended",
-    desc: "Full-body Hilot session — the most popular choice for travelers. Deeply restoring, with English support throughout.",
+    desc: "Full-body Hilot session — the most popular choice for travelers. Deeply unwinding, with English support throughout. (test price for travel visitors)",
   },
   {
     name: "Hilot",
@@ -92,7 +110,7 @@ const MENUS_EN = [
     price: "¥25,000",
     highlight: false,
     label: "",
-    desc: "The ultimate Hilot experience. Ideal for those who want to fully unwind after a long journey.",
+    desc: "The ultimate Hilot experience. Ideal for those who want to fully rest after a long journey. (test price for travel visitors)",
   },
 ];
 
@@ -103,7 +121,7 @@ const COMBO_MENUS_EN = [
     price: "¥20,000",
     highlight: false,
     label: "Combo",
-    desc: "Hilot 60 min + Dry Head Spa 30 min. Body and mind restoration in one session.",
+    desc: "Hilot 60 min + Dry Head Spa 30 min. Body and mind in one session. (test price for travel visitors)",
   },
   {
     name: "Hilot & Head Spa Ritual",
@@ -111,18 +129,18 @@ const COMBO_MENUS_EN = [
     price: "¥25,000",
     highlight: false,
     label: "Combo",
-    desc: "Hilot 90 min + Dry Head Spa 30 min. The most complete full-body and scalp restoration.",
+    desc: "Hilot 90 min + Dry Head Spa 30 min. The most complete full-body and scalp experience. (test price for travel visitors)",
   },
 ];
 
-const OPTION_EN = { name: "Banana Leaf Footment", price: "+¥3,000", desc: "Traditional Filipino banana leaf foot wrap. Available with Hilot and Combo courses." };
+const OPTION_EN = { name: "Banana Leaf Footment", price: "+¥3,000", desc: "Traditional Filipino banana leaf foot wrap. Available with Hilot and Combo courses. (test price for travel visitors)" };
 
 const FAQS_EN = [
-  { q: "Can I bring luggage?", a: "Yes, luggage storage is available during business hours (10:00–20:00)." },
   { q: "Do you speak English?", a: "Yes, English support is available." },
   { q: "Do I need a reservation?", a: "Reservation is recommended. Walk-ins may not be available." },
   { q: "What payment methods are available?", a: "Cash, credit card, and Square QR payment are accepted. Some mobile payments and transportation IC cards are not available." },
   { q: "What if I'm late?", a: "The session time may be shortened. Please arrive 5 minutes early." },
+  { q: "How do I get directions after booking?", a: "After your booking is confirmed, we will send you photo-based directions (station → entrance → 2F → Room 203) via LINE or Square confirmation email." },
 ];
 
 const DIRECTIONS = [
@@ -137,9 +155,9 @@ export default function TravelPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
-    document.title = "Hilot Healing Kagoshima | yoru+禅 — 3 min from Kagoshima-Chuo Station";
+    document.title = "Hilot Relaxation Studio | yoru+禅 — Authentic Filipino Hilot in Kagoshima";
     const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute('content', 'Traditional Filipino Hilot healing salon near Kagoshima-Chuo Station. Private room, English support, luggage storage. Book online via Square.');
+    if (desc) desc.setAttribute('content', 'Authentic Filipino Hilot oil ritual in a wa-modern private room. 3 min from Kagoshima-Chuo Station. Therapist with 10 years of practice in Manila. Booking via Square / LINE.');
     const t = setTimeout(() => setHeroVisible(true), 100);
     return () => clearTimeout(t);
   }, []);
@@ -185,7 +203,7 @@ export default function TravelPage() {
               "3 min from Kagoshima-Chuo",
               "Private Room",
               "English support",
-              "Luggage storage",
+              "10 years Manila experience",
             ].map((b) => (
               <span key={b} className="text-xs text-[#D4A853] border border-[#D4A853]/40 px-3 py-1 rounded-full bg-[#D4A853]/10">
                 {b}
@@ -198,22 +216,22 @@ export default function TravelPage() {
             className="text-3xl md:text-5xl font-bold text-[#EDE8DC] leading-snug mb-3 max-w-lg"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
-            Hilot Healing Salon<br />
+            Hilot Relaxation Studio<br />
             <span className="text-[#D4A853]">near Kagoshima-Chuo</span>
           </h1>
 
           {/* Sub */}
-          <p className="text-[#EDE8DC]/75 text-base md:text-lg leading-relaxed max-w-md mb-2">
-            Traditional Filipino Hilot · Private room · One guest per slot · English available.
-          </p>
-          <p className="text-[#EDE8DC]/55 text-sm mb-8">
-            Luggage storage during business hours (10:00–20:00).
+          <p className="text-[#EDE8DC]/75 text-base md:text-lg leading-relaxed max-w-md mb-8">
+            Authentic Filipino Hilot oil ritual · Private room · One guest per slot · English available.
           </p>
 
-          {/* CTA — Top */}
-          <CTAButton href={SQUARE_TRAVEL_URL} sub="Hilot 90 min — ¥18,000">
-            Book Now
-          </CTAButton>
+          {/* CTA — Top (案B: Square主・LINE副) */}
+          <div className="flex flex-col gap-3 max-w-sm">
+            <CTAButton href={SQUARE_TRAVEL_URL} sub="Hilot 90 min — ¥18,000">
+              Book Now
+            </CTAButton>
+            <LineSubButton href={LINE_URL} />
+          </div>
         </div>
       </section>
 
@@ -353,12 +371,13 @@ export default function TravelPage() {
             </div>
           </AnimatedSection>
 
-          {/* CTA — Middle */}
+          {/* CTA — Middle (案B: Square主・LINE副) */}
           <AnimatedSection>
-            <div className="flex justify-center">
+            <div className="flex flex-col items-center gap-3">
               <CTAButton href={SQUARE_TRAVEL_URL} sub="Hilot 90 min — ¥18,000">
                 Book Now
               </CTAButton>
+              <LineSubButton href={LINE_URL} />
             </div>
           </AnimatedSection>
         </div>
@@ -405,14 +424,11 @@ export default function TravelPage() {
             ))}
           </div>
 
-          {/* Photo placeholder */}
+          {/* Direction photos note (開発者メッセージを削除・適切なメッセージに置換) */}
           <AnimatedSection delay={400}>
-            <div className="mt-8 p-5 border border-dashed border-[#D4A853]/30 rounded-sm bg-[#1A1F2E]/30 text-center">
-              <p className="text-[#D4A853]/60 text-sm">
-                📸 Direction photos (station → entrance → 2F → Room 203) will be added here.
-              </p>
-              <p className="text-[#EDE8DC]/30 text-xs mt-1">
-                Please provide photos to complete this section.
+            <div className="mt-8 p-5 border border-[#D4A853]/20 rounded-sm bg-[#1A1F2E]/30 text-center">
+              <p className="text-[#EDE8DC]/60 text-sm">
+                📸 After your booking is confirmed, we will send you photo-based directions (station → entrance → 2F → Room 203) via LINE or Square confirmation email.
               </p>
             </div>
           </AnimatedSection>
@@ -460,73 +476,6 @@ export default function TravelPage() {
         </div>
       </section>
 
-      {/* ===== 繁體中文 ===== */}
-      <section
-        className="relative bg-[#242320] py-14"
-        style={{
-          clipPath: "polygon(0 4%, 100% 0, 100% 100%, 0 100%)",
-          marginTop: "-2rem",
-          paddingTop: "4rem",
-        }}
-      >
-        <div className="container">
-          <AnimatedSection>
-            <div className="flex items-center gap-3 mb-5">
-              <span className="w-8 h-px bg-[#D4A853]" />
-              <span className="text-[#D4A853] text-xs tracking-widest">繁體中文</span>
-            </div>
-            <div className="p-5 border border-[#D4A853]/20 rounded-sm bg-[#1A1F2E]/50">
-              <p
-                className="text-[#EDE8DC]/85 leading-loose text-sm"
-                style={{ fontFamily: "'Noto Serif TC', serif" }}
-              >
-                <span className="text-[#D4A853] font-medium">鹿兒島中央站步行約3分鐘。</span>
-                傳統菲律賓希洛特（Hilot）療癒按摩。不使用精油、不弄濕頭髮。一個時段只接待一位客人，安靜私密。可英文溝通。營業時間內可寄放行李（10:00–20:00）。含碳酸頭皮護理噴霧，另有椰子              推薦 <span className="text-[#D4A853] font-medium">90分鐘希洛特療程（¥18,000）</span>。         </p>
-              <div className="mt-4">
-                <a
-                  href={SQUARE_TRAVEL_URL}
-                  className="zen-shimmer inline-block bg-[#D4A853] text-[#0D1220] font-bold py-3 px-6 rounded-sm text-sm hover:bg-[#E5BC6A] transition-colors"
-                  style={{ fontFamily: "'Noto Serif TC', serif" }}
-                >
-                  立即預約
-                </a>
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* ===== 한국어 ===== */}
-      <section className="bg-[#1A1F2E] py-14">
-        <div className="container">
-          <AnimatedSection>
-            <div className="flex items-center gap-3 mb-5">
-              <span className="w-8 h-px bg-[#D4A853]" />
-              <span className="text-[#D4A853] text-xs tracking-widest">한국어</span>
-            </div>
-            <div className="p-5 border border-[#D4A853]/20 rounded-sm bg-[#242320]/50">
-              <p
-                className="text-[#EDE8DC]/85 leading-loose text-sm"
-                style={{ fontFamily: "'Noto Sans KR', sans-serif" }}
-              >
-                <span className="text-[#D4A853] font-medium">가고시마추오역에서 도보 약 3분.</span>{" "}
-                전통 필리핀 힐롯(Hilot) 힐링 마사지. 오일/물 없이 받는 드라이 헤드 스파로 머리카락이 젖지 않습니다. 1타임 1명 프라이빗 룸. 영어 가능. 영업시간 내 짐 보관 가능(10:00–20:00). 탄산 두피 스프레이 포함, 코코넛 오일 발 케어 옵션도 있습니다.{" "}
-                <span className="text-[#D4A853] font-medium">90분 힐롯 코스 추천（¥18,000）.</span>
-              </p>
-              <div className="mt-4">
-                <a
-                  href={SQUARE_TRAVEL_URL}
-                  className="zen-shimmer inline-block bg-[#D4A853] text-[#0D1220] font-bold py-3 px-6 rounded-sm text-sm hover:bg-[#E5BC6A] transition-colors"
-                  style={{ fontFamily: "'Noto Sans KR', sans-serif" }}
-                >
-                  지금 예약
-                </a>
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
       {/* ===== FINAL CTA ===== */}
       <section
         className="relative py-20 text-center"
@@ -543,16 +492,18 @@ export default function TravelPage() {
               className="text-2xl md:text-3xl font-bold text-[#EDE8DC] mb-3"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              Restore your body.<br />
-              <span className="text-[#D4A853]">Traditional Hilot Healing.</span>
+              Let your body unwind.<br />
+              <span className="text-[#D4A853]">Traditional Hilot Oil Ritual.</span>
             </h2>
             <p className="text-[#EDE8DC]/55 text-sm mb-8">
               Private room · English OK · Near Kagoshima-Chuo Station
             </p>
-            <div className="flex justify-center">
+            {/* CTA案B: Square主・LINE副 */}
+            <div className="flex flex-col items-center gap-3">
               <CTAButton href={SQUARE_TRAVEL_URL} sub="Hilot 90 min — ¥18,000">
                 Book Now
               </CTAButton>
+              <LineSubButton href={LINE_URL} />
             </div>
           </AnimatedSection>
         </div>
@@ -564,7 +515,7 @@ export default function TravelPage() {
           className="text-[#D4A853] text-lg font-bold mb-1"
           style={{ fontFamily: "'Playfair Display', serif" }}
         >
-          yoru+禅
+          Hilot Relaxation Studio yoru+禅
         </p>
         <p className="text-[#EDE8DC]/40 text-xs">
           Take Station Building 2F 203 / 10:00–20:00

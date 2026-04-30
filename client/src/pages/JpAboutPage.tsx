@@ -62,9 +62,9 @@ export default function JpAboutPage() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    document.title = "yoru+禅について｜鹿児島中央駅のドライヘッドスパ";
+    document.title = "ヒロット専門 yoru+禅について｜フィリピン伝統オイルリラクゼーション 鹿児島中央駅";
     const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute('content', 'yoru+禅は鹿児島中央駅から徒歩3分のドライヘッドスパ専門サロン。完全個室・1枠1名。頭にオイル・水を使わないドライ施術。看板なしのプライベートサロンです。');
+    if (desc) desc.setAttribute('content', 'yoru+禅は鹿児島中央駅から徒歩3分のヒロット専門プライベートサロン。マニラで10年の現役経験を持つセラピストによるフィリピン伝統オイルリラクゼーション。完全個室・1枠1名。');
     const t = setTimeout(() => setVisible(true), 100);
     return () => clearTimeout(t);
   }, []);
@@ -106,8 +106,9 @@ export default function JpAboutPage() {
             夜の静けさの中で、<br />頭と心をゆるめる場所。
           </h2>
           <p className="text-[#EDE8DC]/65 text-sm leading-loose">
-            yoru+禅は、鹿児島中央駅から徒歩約3分の場所にある、ドライヘッドスパ専門のプライベートサロンです。
-            「禅」の名のとおり、余計なものをそぎ落とした静かな空間で、ただ頭をゆるめることだけに集中できる時間を提供しています。
+            yoru+禅は、鹿児島中央駅から徒歩約3分の場所にある、ヒロット専門のプライベートサロンです。
+            フィリピン伝統の手技「ヒロット」を、マニラで10年の現役経験を持つセラピストが、和モダンの完全個室でお届けします。
+            「禅」の名のとおり、余計なものをそぎ落とした静かな空間で、深いリラックスへ導く穏やかな時間を提供しています。
           </p>
         </AnimatedSection>
 
@@ -120,8 +121,8 @@ export default function JpAboutPage() {
           <div className="space-y-6">
             {[
               {
-                title: "ドライヘッドスパ専門",
-                body: "頭部にオイルも水も使わない、ドライ施術に特化しています。髪が濡れないため、施術後すぐに外出できます。",
+                title: "ヒロット専門",
+                body: "フィリピン伝統の手技「ヒロット」を専門とするサロンです。温かい手のひらと植物オイルで、深いリラックスへ導きます。",
               },
               {
                 title: "完全個室・1枠1名",

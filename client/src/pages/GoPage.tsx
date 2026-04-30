@@ -13,9 +13,9 @@ export default function GoPage() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    document.title = "yoru+禅 ドライヘッドスパ｜鹿児島中央駅徒歩3分・完全個室";
+    document.title = "ヒロット専門 yoru+禅｜Filipino Hilot Healing in Kagoshima";
     const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute('content', '鹿児島中央駅から徒歩約3分のドライヘッドスパ「yoru+禅」。完全個室・1枠1名。眼精疲労・首肩疲れ・眠りの浅さにアプローチ。英語対応・荷物預かりあり。');
+    if (desc) desc.setAttribute('content', '鹿児島中央駅徒歩3分、和モダンの完全個室で受けるフィリピン伝統オイルリラクゼーション「ヒロット」専門店。マニラで10年の現役経験を持つセラピストが施術。完全予約制。');
     const t = setTimeout(() => setVisible(true), 100);
     return () => clearTimeout(t);
   }, []);
@@ -48,7 +48,7 @@ export default function GoPage() {
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="w-8 h-px bg-[#D4A853]" />
             <span className="text-[#D4A853] text-xs tracking-[0.3em] uppercase font-light">
-              Dry Head Spa
+              HILOT フィリピン伝統オイルリラクゼーション
             </span>
             <span className="w-8 h-px bg-[#D4A853]" />
           </div>
@@ -56,10 +56,10 @@ export default function GoPage() {
             className="text-4xl md:text-5xl font-bold text-[#EDE8DC] tracking-wide"
             style={{ fontFamily: "'Noto Serif JP', serif" }}
           >
-            yoru<span className="text-[#D4A853]">+</span>禅
+            ヒロット専門 yoru<span className="text-[#D4A853]">+</span>禅
           </h1>
           <p className="mt-2 text-[#D4A853] text-sm tracking-widest font-light">
-            よる・ぜん
+            フィリピン伝統オイルリラクゼーション / Filipino Traditional Oil Relaxation
           </p>
         </div>
 
@@ -68,12 +68,12 @@ export default function GoPage() {
           className="text-xl md:text-2xl font-medium text-[#EDE8DC] text-center mb-2"
           style={{ fontFamily: "'Noto Serif JP', serif" }}
         >
-          どちらで予約しますか？
+          どちらでご覧になりますか？
         </h2>
 
         {/* Sub text */}
         <p className="text-[#EDE8DC]/70 text-sm text-center mb-8 leading-relaxed px-2">
-          鹿児島中央駅から徒歩約3分<br className="sm:hidden" />｜完全個室｜英語対応<br className="sm:hidden" />｜荷物預かり（10:00–20:00）
+          鹿児島中央駅から徒歩約3分<br className="sm:hidden" />｜完全個室｜英語対応 (10:00–20:00)
         </p>
 
         {/* Buttons */}
@@ -90,7 +90,7 @@ export default function GoPage() {
                     日本語で予約
                   </div>
                   <div className="text-[#D4A853]/80 text-sm font-light">
-                    睡眠・眼精疲労・首肩のお疲れに
+                    ヒロット・ドライヘッドスパ・足つぼ
                   </div>
                 </div>
                 <div className="text-[#D4A853] text-2xl group-hover:translate-x-1 transition-transform duration-300">
@@ -112,7 +112,7 @@ export default function GoPage() {
                     Travelers
                   </div>
                   <div className="text-[#EDE8DC]/60 text-sm font-light">
-                    English&nbsp;/&nbsp;繁體中文&nbsp;/&nbsp;한국어
+                    English support available
                   </div>
                 </div>
                 <div className="text-[#EDE8DC]/60 text-2xl group-hover:translate-x-1 transition-transform duration-300">
@@ -129,7 +129,7 @@ export default function GoPage() {
             "駅徒歩3分",
             "完全個室",
             "English OK",
-            "荷物預かり",
+            "ヒロット専門",
           ].map((badge) => (
             <span
               key={badge}

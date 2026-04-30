@@ -68,7 +68,7 @@ export default function JpAccessPage() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    document.title = "アクセス・道順｜yoru+禅 鹿児島中央駅徒歩3分";
+    document.title = "アクセス・道順｜ヒロット専門 yoru+禅 鹿児島中央駅徒歩3分";
     const desc = document.querySelector('meta[name="description"]');
     if (desc) desc.setAttribute('content', 'yoru+禅へのアクセス案内。鹿児島中央駅から徒歩約3分、武ステーションビル2F 203号室。看板なしのサロンですが、写真付きの道順案内があります。');
     const t = setTimeout(() => setVisible(true), 100);
