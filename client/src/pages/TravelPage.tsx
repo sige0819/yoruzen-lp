@@ -61,6 +61,7 @@ function CTAButton({ href, children, sub }: { href: string; children: React.Reac
 const WHY_US = [
   { icon: "🚶", text: "3 min from Kagoshima-Chuo Station" },
   { icon: "🚪", text: "Private room (1 guest per slot)" },
+  { icon: "🌿", text: "Hilot — traditional Filipino healing massage. Deeply relaxing, no oil on head." },
   { icon: "🗣️", text: "English support available" },
   { icon: "🧳", text: "Luggage storage during business hours (10:00–20:00)" },
   { icon: "✨", text: "Carbonated scalp spray included" },
@@ -69,28 +70,28 @@ const WHY_US = [
 
 const MENUS_EN = [
   {
-    name: "Quick Reset",
+    name: "Hilot Quick Reset",
     time: "30 min",
-    price: "¥6,000",
+    price: "¥7,000",
     highlight: false,
     label: "",
-    desc: "Short dry head spa for travelers. Recommended for jet lag, head heaviness, and walking fatigue.",
+    desc: "Traditional Filipino Hilot healing for travelers. Relieves jet lag, head heaviness, and walking fatigue.",
   },
   {
-    name: "Traveler Recovery",
+    name: "Hilot Traveler Recovery",
     time: "45 min",
-    price: "¥8,000",
+    price: "¥9,000",
     highlight: true,
     label: "★ Recommended",
-    desc: "Private dry head spa with carbonated scalp spray. Recommended for jet lag, neck and shoulder fatigue, and travel recovery.",
+    desc: "Hilot full-body healing with carbonated scalp spray. Deeply relaxing — ideal for neck/shoulder fatigue and travel recovery.",
   },
   {
-    name: "Japanese Rest Experience",
+    name: "Hilot Japanese Rest Experience",
     time: "60 min",
-    price: "¥11,000",
+    price: "¥12,000",
     highlight: false,
     label: "",
-    desc: "Dry head spa with coconut-oil foot care in a private room. Includes English support and a small Japanese hospitality touch.",
+    desc: "Hilot healing with coconut-oil foot care in a private room. The most complete restoration experience, with English support.",
   },
 ];
 
@@ -114,9 +115,9 @@ export default function TravelPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
-    document.title = "Dry Head Spa Kagoshima | yoru+禅 — 3 min from Kagoshima-Chuo Station";
+    document.title = "Hilot Healing Kagoshima | yoru+禅 — 3 min from Kagoshima-Chuo Station";
     const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute('content', 'Private dry head spa near Kagoshima-Chuo Station. No oil, no water on hair. English support available. Luggage storage during business hours. Book online via Square.');
+    if (desc) desc.setAttribute('content', 'Traditional Filipino Hilot healing salon near Kagoshima-Chuo Station. Private room, English support, luggage storage. Book online via Square.');
     const t = setTimeout(() => setHeroVisible(true), 100);
     return () => clearTimeout(t);
   }, []);
@@ -175,20 +176,20 @@ export default function TravelPage() {
             className="text-3xl md:text-5xl font-bold text-[#EDE8DC] leading-snug mb-3 max-w-lg"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
-            Private Dry Head Spa<br />
+            Hilot Healing Salon<br />
             <span className="text-[#D4A853]">near Kagoshima-Chuo</span>
           </h1>
 
           {/* Sub */}
           <p className="text-[#EDE8DC]/75 text-base md:text-lg leading-relaxed max-w-md mb-2">
-            No oil on head · No water · One guest per slot · English available.
+            Traditional Filipino Hilot · Private room · One guest per slot · English available.
           </p>
           <p className="text-[#EDE8DC]/55 text-sm mb-8">
             Luggage storage during business hours (10:00–20:00).
           </p>
 
           {/* CTA — Top */}
-          <CTAButton href={SQUARE_TRAVEL_URL} sub="45 min Traveler Recovery — ¥8,000">
+          <CTAButton href={SQUARE_TRAVEL_URL} sub="45 min Hilot Traveler Recovery — ¥9,000">
             Book Now
           </CTAButton>
         </div>
@@ -289,7 +290,7 @@ export default function TravelPage() {
           {/* CTA — Middle */}
           <AnimatedSection>
             <div className="flex justify-center">
-              <CTAButton href={SQUARE_TRAVEL_URL} sub="45 min — ¥8,000">
+              <CTAButton href={SQUARE_TRAVEL_URL} sub="45 min Hilot — ¥9,000">
                 Book Now
               </CTAButton>
             </div>
@@ -414,7 +415,7 @@ export default function TravelPage() {
                 style={{ fontFamily: "'Noto Serif TC', serif" }}
               >
                 <span className="text-[#D4A853] font-medium">鹿兒島中央站步行約3分鐘。</span>
-                不使用精油、不弄濕頭髮的乾式頭療（Dry Head Spa）。一個時段只接待一位客人，安靜私密。可英文溝通。營業時間內可寄放行李（10:00–20:00）。含碳酸頭皮護理噴霧，另有椰子油足部護理選項。推薦 <span className="text-[#D4A853] font-medium">45分鐘旅行恢復療程</span>。
+                傳統菲律賓希洛特（Hilot）療癒按摩。不使用精油、不弄濕頭髮。一個時段只接待一位客人，安靜私密。可英文溝通。營業時間內可寄放行李（10:00–20:00）。含碳酸頭皮護理噴霧，另有椰子油足部護理選項。推薦 <span className="text-[#D4A853] font-medium">45分鐘希洛特旅行恢復療程（¥9,000）</span>。
               </p>
               <div className="mt-4">
                 <a
@@ -444,8 +445,8 @@ export default function TravelPage() {
                 style={{ fontFamily: "'Noto Sans KR', sans-serif" }}
               >
                 <span className="text-[#D4A853] font-medium">가고시마추오역에서 도보 약 3분.</span>{" "}
-                오일/물 없이 받는 드라이 헤드 스파로 머리카락이 젖지 않습니다. 1타임 1명 프라이빗 룸. 영어 가능. 영업시간 내 짐 보관 가능(10:00–20:00). 탄산 두피 스프레이 포함, 코코넛 오일 발 케어 옵션도 있습니다.{" "}
-                <span className="text-[#D4A853] font-medium">45분 여행 회복 코스 추천.</span>
+                전통 필리핀 힐롯(Hilot) 힐링 마사지. 오일/물 없이 받는 드라이 헤드 스파로 머리카락이 젖지 않습니다. 1타임 1명 프라이빗 룸. 영어 가능. 영업시간 내 짐 보관 가능(10:00–20:00). 탄산 두피 스프레이 포함, 코코넛 오일 발 케어 옵션도 있습니다.{" "}
+                <span className="text-[#D4A853] font-medium">45분 힐롯 여행 회복 코스 추천（¥9,000）.</span>
               </p>
               <div className="mt-4">
                 <a
@@ -477,14 +478,14 @@ export default function TravelPage() {
               className="text-2xl md:text-3xl font-bold text-[#EDE8DC] mb-3"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              Reset your body.<br />
-              <span className="text-[#D4A853]">In 45 minutes.</span>
+              Restore your body.<br />
+              <span className="text-[#D4A853]">Hilot in 45 minutes.</span>
             </h2>
             <p className="text-[#EDE8DC]/55 text-sm mb-8">
               Private room · English OK · Near Kagoshima-Chuo Station
             </p>
             <div className="flex justify-center">
-              <CTAButton href={SQUARE_TRAVEL_URL} sub="45 min Traveler Recovery — ¥8,000">
+              <CTAButton href={SQUARE_TRAVEL_URL} sub="45 min Hilot Recovery — ¥9,000">
                 Book Now
               </CTAButton>
             </div>
