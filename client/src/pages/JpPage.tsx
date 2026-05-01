@@ -2,13 +2,12 @@
  * /jp — 日本人向けLP
  * Design: 夜桜の間 — 深藍背景、桜金アクセント、斜めセクション分割
  * 訴求: ヒロット専門 yoru+禅 — フィリピン伝統オイルリラクゼーション
- * CTA: SQUARE_DOMESTIC_URL × 上中下3箇所 + LINE_URL × 3箇所
+ * CTA: LINE_URL × 3箇所のみ（Round 4: 国内顧客はLINE登録に統一）
  */
 
 import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 
-const SQUARE_DOMESTIC_URL = "https://app.squareup.com/appointments/buyer/widget/ztpq06tczlisjz/LHKH7J4ZZ160Y";
 const LINE_URL = "https://line.me/R/ti/p/@308fgdko";
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/hilot-fv-new-Aq2zeCx2FgSffDqQcZzBs2.webp";
 const HILOT_ABOUT_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/hilot-about-new-dpBYyRcFNqiAYM2sq5UKW5.webp";
@@ -46,30 +45,6 @@ function AnimatedSection({ children, className = "", delay = 0 }: { children: Re
     >
       {children}
     </div>
-  );
-}
-
-function CTAButton({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <a
-      href={href}
-      className="inline-block w-full max-w-sm text-[#EDE8DC] font-medium text-center py-3.5 px-8 rounded-sm tracking-widest transition-all duration-300"
-      style={{
-        fontFamily: "'Noto Serif JP', serif",
-        fontSize: "0.9rem",
-        border: "1px solid rgba(212,168,83,0.35)",
-        background: "rgba(212,168,83,0.05)",
-        marginTop: "0.75rem",
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.background = "rgba(212,168,83,0.10)";
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.background = "rgba(212,168,83,0.05)";
-      }}
-    >
-      {children}
-    </a>
   );
 }
 
@@ -272,10 +247,9 @@ export default function JpPage() {
             フィリピン伝統オイルリラクゼーション「ヒロット」。
           </p>
 
-          {/* CTA — Top */}
+          {/* CTA — Top (LINE only) */}
           <div className="flex flex-col items-start">
             <LineButton href={LINE_URL} />
-            <CTAButton href={SQUARE_DOMESTIC_URL}>Squareで予約する</CTAButton>
           </div>
         </div>
       </section>
@@ -675,11 +649,10 @@ export default function JpPage() {
             </div>
           </AnimatedSection>
 
-          {/* CTA — Middle */}
+          {/* CTA — Middle (LINE only) */}
           <AnimatedSection>
             <div className="flex flex-col items-center">
               <LineButton href={LINE_URL} />
-              <CTAButton href={SQUARE_DOMESTIC_URL}>Squareで予約する</CTAButton>
             </div>
           </AnimatedSection>
         </div>
@@ -860,7 +833,6 @@ export default function JpPage() {
             </p>
             <div className="flex flex-col items-center">
               <LineButton href={LINE_URL} />
-              <CTAButton href={SQUARE_DOMESTIC_URL}>Squareで予約する</CTAButton>
             </div>
           </AnimatedSection>
         </div>
