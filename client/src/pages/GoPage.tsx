@@ -7,7 +7,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
 
-const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/hilot-fv-new-Aq2zeCx2FgSffDqQcZzBs2.webp";
+const HERO_BG = "/hilot/hilot-fv-piso-pc.png";
 
 export default function GoPage() {
   const [visible, setVisible] = useState(false);

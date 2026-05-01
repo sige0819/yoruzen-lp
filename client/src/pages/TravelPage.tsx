@@ -10,7 +10,7 @@ import { Link } from "wouter";
 
 // Round 2: Square widget URLをJP版と統一
 const SQUARE_TRAVEL_URL = "https://app.squareup.com/appointments/buyer/widget/ztpq06tczlisjz/LHKH7J4ZZ160Y";
-const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/hilot-fv-new-Aq2zeCx2FgSffDqQcZzBs2.webp";
+const HERO_BG = "/hilot/hilot-fv-piso-pc.png";
 const MENU_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/menu-bg-c69VwCk2UsoNzVnr7L95ma.webp";
 
 function useInView(threshold = 0.15) {

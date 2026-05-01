@@ -9,9 +9,9 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 
 const LINE_URL = "https://line.me/R/ti/p/@308fgdko";
-const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/hilot-fv-new-Aq2zeCx2FgSffDqQcZzBs2.webp";
+const HERO_BG = "/hilot/hilot-fv-piso-pc.png";
 const HILOT_ABOUT_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/hilot-about-new-dpBYyRcFNqiAYM2sq5UKW5.webp";
-const THERAPIST_IMG = "/manus-storage/therapist-piso_fa8b8f26.png";
+const THERAPIST_IMG = "/hilot/therapist-piso-hires.png";
 const HILOT_MENU_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/hilot-menu-hilot-KyxBwfCdfohWxiizvh6WgE.webp";
 const DRY_MENU_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663090369358/SvhX77X4H5HqRSLKCsXQQT/hilot-menu-dry-ZzAy3xzWADj7TPfPAfavxn.webp";
 
