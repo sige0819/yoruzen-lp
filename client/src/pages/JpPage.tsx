@@ -247,9 +247,16 @@ export default function JpPage() {
             フィリピン伝統オイルリラクゼーション「ヒロット」。
           </p>
 
-          {/* CTA — Top (LINE only) */}
-          <div className="flex flex-col items-start">
-            <LineButton href={LINE_URL} />
+          {/* CTA — Top (Web + LINE) */}
+          <div className="cta-group flex flex-wrap gap-4 justify-start mt-2">
+            <a href="https://book.squareup.com/appointments/ztpq06tczlisjz/location/LHKH7J4ZZ160Y/services" className="cta-btn web zen-shimmer inline-block py-[18px] px-10 text-[#0D1220] no-underline text-base tracking-wider rounded-sm transition-opacity duration-300 font-bold min-h-[44px] min-w-[220px] text-center bg-[#D4A853] shadow-lg shadow-[#D4A853]/35 hover:opacity-85">
+              Web予約（24時間受付）
+              <span className="cta-btn-label block text-xs tracking-widest mt-1.5 font-normal opacity-85">空き枠を見て即予約</span>
+            </a>
+            <a href="https://lin.ee/CHANGE_ME" className="cta-btn line zen-shimmer inline-block py-[18px] px-10 text-white no-underline text-base tracking-wider rounded-sm transition-opacity duration-300 font-bold min-h-[44px] min-w-[220px] text-center bg-[#06C755] shadow-lg shadow-[#06C755]/30 hover:opacity-85">
+              LINEで予約・相談
+              <span className="cta-btn-label block text-xs tracking-widest mt-1.5 font-normal opacity-85">質問・空き確認・予約</span>
+            </a>
           </div>
         </div>
       </section>
@@ -434,6 +441,10 @@ export default function JpPage() {
                 <p className="text-[#EDE8DC]/70 text-sm leading-relaxed">
                   フィリピン・マニラで10年にわたりヒロットを実践してきた経験を持つセラピストが担当します。異国の伝統を、和モダンの静かな個室でそのままお届けします。
                 </p>
+                <div className="mt-4 text-[#EDE8DC]/80 text-sm leading-relaxed border-t border-[#D4A853]/20 pt-3">
+                  <p>出勤日: 終日対応（10:00〜20:00）</p>
+                  <p>休み日: 19:00以降のみ対応（120分メニューまでOK）</p>
+                </div>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {["ヒロット10年", "完全個室", "日本語対応"].map((tag) => (
                     <span key={tag} className="text-xs text-[#D4A853] border border-[#D4A853]/30 px-2 py-0.5 rounded-full bg-[#D4A853]/8">
@@ -651,8 +662,15 @@ export default function JpPage() {
 
           {/* CTA — Middle (LINE only) */}
           <AnimatedSection>
-            <div className="flex flex-col items-center">
-              <LineButton href={LINE_URL} />
+            <div className="cta-group flex flex-wrap gap-4 justify-center mt-2">
+              <a href="https://book.squareup.com/appointments/ztpq06tczlisjz/location/LHKH7J4ZZ160Y/services" className="cta-btn web zen-shimmer inline-block py-[18px] px-10 text-[#0D1220] no-underline text-base tracking-wider rounded-sm transition-opacity duration-300 font-bold min-h-[44px] min-w-[220px] text-center bg-[#D4A853] shadow-lg shadow-[#D4A853]/35 hover:opacity-85">
+                Web予約（24時間受付）
+                <span className="cta-btn-label block text-xs tracking-widest mt-1.5 font-normal opacity-85">空き枠を見て即予約</span>
+              </a>
+              <a href="https://lin.ee/CHANGE_ME" className="cta-btn line zen-shimmer inline-block py-[18px] px-10 text-white no-underline text-base tracking-wider rounded-sm transition-opacity duration-300 font-bold min-h-[44px] min-w-[220px] text-center bg-[#06C755] shadow-lg shadow-[#06C755]/30 hover:opacity-85">
+                LINEで予約・相談
+                <span className="cta-btn-label block text-xs tracking-widest mt-1.5 font-normal opacity-85">質問・空き確認・予約</span>
+              </a>
             </div>
           </AnimatedSection>
         </div>
@@ -831,8 +849,15 @@ export default function JpPage() {
             <p className="text-[#EDE8DC]/60 text-sm mb-8">
               完全個室・1枠1名のプライベート空間でお待ちしています。
             </p>
-            <div className="flex flex-col items-center">
-              <LineButton href={LINE_URL} />
+            <div className="cta-group flex flex-wrap gap-4 justify-center mt-2">
+              <a href="https://book.squareup.com/appointments/ztpq06tczlisjz/location/LHKH7J4ZZ160Y/services" className="cta-btn web zen-shimmer inline-block py-[18px] px-10 text-[#0D1220] no-underline text-base tracking-wider rounded-sm transition-opacity duration-300 font-bold min-h-[44px] min-w-[220px] text-center bg-[#D4A853] shadow-lg shadow-[#D4A853]/35 hover:opacity-85">
+                Web予約（24時間受付）
+                <span className="cta-btn-label block text-xs tracking-widest mt-1.5 font-normal opacity-85">空き枠を見て即予約</span>
+              </a>
+              <a href="https://lin.ee/CHANGE_ME" className="cta-btn line zen-shimmer inline-block py-[18px] px-10 text-white no-underline text-base tracking-wider rounded-sm transition-opacity duration-300 font-bold min-h-[44px] min-w-[220px] text-center bg-[#06C755] shadow-lg shadow-[#06C755]/30 hover:opacity-85">
+                LINEで予約・相談
+                <span className="cta-btn-label block text-xs tracking-widest mt-1.5 font-normal opacity-85">質問・空き確認・予約</span>
+              </a>
             </div>
           </AnimatedSection>
         </div>
@@ -848,7 +873,7 @@ export default function JpPage() {
         </p>
         <p className="text-[#EDE8DC]/40 text-xs mb-1">フィリピン伝統オイルリラクゼーション</p>
         <p className="text-[#EDE8DC]/40 text-xs">
-          武ステーションビル2F 203 / 10:00–20:00
+          武ステーションビル2F 203 / 10:00–20:00／完全予約制
         </p>
         <div className="mt-4 flex flex-wrap justify-center gap-4">
           <Link href="/jp/first">
